@@ -8,8 +8,10 @@ class CreateImdbDataPoints < ActiveRecord::Migration
       t.integer :metacritic,  default: 0
       t.integer :movie_meter, default: 0
       t.integer :budget,      default: 0
+      t.references :movie,    default: 0
 
       t.timestamps
     end
+    add_index :imdb_data_points, :movie_id
   end
 end
