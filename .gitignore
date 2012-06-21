@@ -49,4 +49,4 @@ Thumbs.db
 
 # databases #
 #############
-.sqlite3
+*.sqlite3
