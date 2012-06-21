@@ -68,12 +68,15 @@ module UpdateTweet
       TweetDatum.find_or_create_by_movie_id( movie.id ) do | tweet |
         tweet.num = num_tweets
       end
+      
     end
   end
 end
 
 namespace :db do
+
   desc "updates the db"
+
   task update: :environment do
     
     UpdateRottenTomato.in_theaters
@@ -82,7 +85,6 @@ namespace :db do
     movies = Movie.all
 
     UpdateTweet.num(movies)
-
 
   end
 end
