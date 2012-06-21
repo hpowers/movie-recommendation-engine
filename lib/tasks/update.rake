@@ -1,6 +1,8 @@
+require 'net/http'
+
 module UpdateTomato
   @key = ENV["TOMATOES_API"]
-  @limit = 50
+  @limit = 10
 
   def self.in_theaters
     url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/"+
@@ -21,7 +23,7 @@ module UpdateTomato
 
       active_movie = Movie.find_or_create_by_title( rotten_record['title'] )
 
-      RottenTomato.find_or_create_by_movie_id( active_movie.id ) do | rotten | 
+      RtDatum.find_or_create_by_movie_id( active_movie.id ) do | rotten | 
         
         rotten.runtime           = rotten_record['runtime']
         rotten.mpaa_rating       = rotten_record['mpaa_rating']
@@ -45,7 +47,7 @@ namespace :db do
   task update: :environment do
     
     UpdateTomato.in_theaters
-    UpdateTomato.opening
+    # UpdateTomato.opening
 
   end
 end

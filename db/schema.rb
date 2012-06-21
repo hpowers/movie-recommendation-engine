@@ -13,16 +13,16 @@
 
 ActiveRecord::Schema.define(:version => 20120620174600) do
 
-  create_table "ebert_stars", :force => true do |t|
+  create_table "ebert_data", :force => true do |t|
     t.integer  "stars",      :default => 0
     t.integer  "movie_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
 
-  add_index "ebert_stars", ["movie_id"], :name => "index_ebert_stars_on_movie_id"
+  add_index "ebert_data", ["movie_id"], :name => "index_ebert_data_on_movie_id"
 
-  create_table "hsx_data_points", :force => true do |t|
+  create_table "hsx_data", :force => true do |t|
     t.float    "price",      :default => 0.0
     t.integer  "gross",      :default => 0
     t.integer  "theaters",   :default => 0
@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(:version => 20120620174600) do
     t.datetime "updated_at",                  :null => false
   end
 
-  add_index "hsx_data_points", ["movie_id"], :name => "index_hsx_data_points_on_movie_id"
+  add_index "hsx_data", ["movie_id"], :name => "index_hsx_data_on_movie_id"
 
-  create_table "imdb_data_points", :force => true do |t|
+  create_table "imdb_data", :force => true do |t|
     t.text     "title",       :default => "0"
     t.date     "release"
     t.integer  "length",      :default => 0
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20120620174600) do
     t.datetime "updated_at",                   :null => false
   end
 
-  add_index "imdb_data_points", ["movie_id"], :name => "index_imdb_data_points_on_movie_id"
+  add_index "imdb_data", ["movie_id"], :name => "index_imdb_data_on_movie_id"
 
   create_table "movies", :force => true do |t|
     t.string   "title",                         :null => false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20120620174600) do
   add_index "movies", ["default"], :name => "index_movies_on_default"
   add_index "movies", ["title"], :name => "index_movies_on_title", :unique => true
 
-  create_table "rotten_tomatoes", :force => true do |t|
+  create_table "rt_data", :force => true do |t|
     t.date     "release_date"
     t.integer  "runtime",           :default => 0
     t.string   "mpaa_rating"
@@ -71,22 +71,23 @@ ActiveRecord::Schema.define(:version => 20120620174600) do
     t.datetime "updated_at",                       :null => false
   end
 
-  add_index "rotten_tomatoes", ["movie_id"], :name => "index_rotten_tomatoes_on_movie_id"
+  add_index "rt_data", ["movie_id"], :name => "index_rt_data_on_movie_id"
 
   create_table "services", :force => true do |t|
-    t.string   "name"
-    t.integer  "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name",                      :null => false
+    t.integer  "status",     :default => 0
+    t.integer  "strength",   :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
-  create_table "tweets", :force => true do |t|
+  create_table "tweet_data", :force => true do |t|
     t.integer  "num",        :default => 0
     t.integer  "movie_id"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
 
-  add_index "tweets", ["movie_id"], :name => "index_tweets_on_movie_id"
+  add_index "tweet_data", ["movie_id"], :name => "index_tweet_data_on_movie_id"
 
 end
