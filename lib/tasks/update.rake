@@ -3,7 +3,7 @@ require 'open-uri'
 
 module UpdateRottenTomato
   @key = ENV["TOMATOES_API"]
-  @limit = 10
+  @limit = 50
 
   def self.in_theaters
     url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/"+
@@ -77,7 +77,7 @@ namespace :db do
   task update: :environment do
     
     UpdateRottenTomato.in_theaters
-    # UpdateRottenTomato.opening
+    UpdateRottenTomato.opening
 
     movies = Movie.all
 
