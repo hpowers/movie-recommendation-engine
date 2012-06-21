@@ -60,10 +60,15 @@ ActiveRecord::Schema.define(:version => 20120620174600) do
   add_index "movies", ["title"], :name => "index_movies_on_title", :unique => true
 
   create_table "rotten_tomatoes", :force => true do |t|
-    t.integer  "score",      :default => 0
+    t.date     "release_date"
+    t.integer  "runtime",           :default => 0
+    t.string   "mpaa_rating"
+    t.text     "critics_consensus"
+    t.integer  "critics_score",     :default => 0
+    t.integer  "audience_score",    :default => 0
     t.integer  "movie_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "rotten_tomatoes", ["movie_id"], :name => "index_rotten_tomatoes_on_movie_id"

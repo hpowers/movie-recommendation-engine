@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <h1>Movies</h1>
+  <ul>
+    <% @movies.each do |movie| %>
+      <li><b><%= movie.title %></b> - <%= movie.score %></li>
+    <% end %>
+  </ul>
+</body>
+</html>

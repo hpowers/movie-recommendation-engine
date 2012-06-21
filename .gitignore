@@ -1,7 +1,8 @@
-# bundler config & stubs #
+# config #
 ##########################
 /.bundle
 bundler_stubs/
+.rvmrc
 
 # Compiled source #
 ###################
@@ -45,3 +46,7 @@ Thumbs.db
 # tmp files #
 #############
 /tmp
+
+# databases #
+#############
+.sqlite3

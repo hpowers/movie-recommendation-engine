@@ -11,4 +11,6 @@ resources :movies
   #   resources :hsx_data_points
   # end
 
+root to: 'movies#index'
+
 end
