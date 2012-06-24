@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(:version => 20120620174600) do
 
   create_table "ebert_data", :force => true do |t|
-    t.integer  "stars",      :default => 0
+    t.float    "stars",      :default => 0.0
     t.integer  "movie_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   add_index "ebert_data", ["movie_id"], :name => "index_ebert_data_on_movie_id"
@@ -34,16 +34,14 @@ ActiveRecord::Schema.define(:version => 20120620174600) do
   add_index "hsx_data", ["movie_id"], :name => "index_hsx_data_on_movie_id"
 
   create_table "imdb_data", :force => true do |t|
-    t.text     "title",       :default => "0"
-    t.date     "release"
-    t.integer  "length",      :default => 0
+    t.text     "title"
     t.integer  "viewer",      :default => 0
     t.integer  "metacritic",  :default => 0
     t.integer  "movie_meter", :default => 0
     t.integer  "budget",      :default => 0
     t.integer  "movie_id",    :default => 0
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   add_index "imdb_data", ["movie_id"], :name => "index_imdb_data_on_movie_id"

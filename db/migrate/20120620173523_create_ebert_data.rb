@@ -1,7 +1,7 @@
 class CreateEbertData < ActiveRecord::Migration
   def change
     create_table :ebert_data do |t|
-      t.integer :stars, default: 0
+      t.float :stars, default: 0.0
       t.references :movie
 
       t.timestamps

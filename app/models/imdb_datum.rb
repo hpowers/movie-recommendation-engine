@@ -1,5 +1,4 @@
 class ImdbDatum < ActiveRecord::Base
   belongs_to      :movie
-  attr_accessible :budget, :length, :metacritic, :movie_meter, :release,
-                  :title,  :viewer
+  attr_accessible :budget, :metacritic, :movie_meter, :title, :viewer
 end
