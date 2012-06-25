@@ -1,7 +1,10 @@
 class MoviesController < ApplicationController
 
   def index
-    @movies = Movie.all
+    
+    @movies = Movie.where(default: true)
+    # @movies = Movie.all
+
   end
 
 end

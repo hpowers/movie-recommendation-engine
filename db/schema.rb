@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120620174600) do
+ActiveRecord::Schema.define(:version => 20120624164828) do
 
   create_table "ebert_data", :force => true do |t|
     t.float    "stars",      :default => 0.0
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120620174600) do
     t.integer  "movie_id",   :default => 0
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
+    t.string   "url",        :default => "",  :null => false
   end
 
   add_index "hsx_data", ["movie_id"], :name => "index_hsx_data_on_movie_id"
@@ -40,8 +41,9 @@ ActiveRecord::Schema.define(:version => 20120620174600) do
     t.integer  "movie_meter", :default => 0
     t.integer  "budget",      :default => 0
     t.integer  "movie_id",    :default => 0
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.string   "url",         :default => "", :null => false
   end
 
   add_index "imdb_data", ["movie_id"], :name => "index_imdb_data_on_movie_id"

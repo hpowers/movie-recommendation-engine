@@ -6,4 +6,6 @@ class Movie < ActiveRecord::Base
   has_one :hsx_datum   , dependent: :destroy
   
   attr_accessible :default, :score, :title
+
+  default_scope order("score DESC")
 end

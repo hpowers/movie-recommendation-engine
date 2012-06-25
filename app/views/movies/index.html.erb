@@ -3,13 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <style type="text/css">
+  .movie{
+    margin-bottom: 10px;
+  }
+  </style>
 </head>
 <body>
   <h1>Movies</h1>
-  <ul>
+  <ol>
     <% @movies.each do |movie| %>
-      <li><b><%= movie.title %></b> - <%= movie.score %></li>
+    <li class="movie"><b><%= movie.title %></b> - <%= movie.score %>
+      <ul>
+        <li>
+          <%= (Date.today - movie.rt_datum.release_date).to_i %> days ago - 
+          <%= movie.rt_datum.release_date %>
+        </li>
+        <li>rt_datum.critics_score - <%= movie.rt_datum.critics_score %></li>
+        <li>
+          <a href="http://www.imdb.com/title/<%= movie.imdb_datum.url %>/">
+          imdb_datum.metacritic - <%= movie.imdb_datum.metacritic %>
+          </a>
+        </li>
+        <li>
+          <a href="http://www.hsx.com/security/view/<%= movie.hsx_datum.url %>">
+          hsx_datum.theaters - <%= movie.hsx_datum.theaters %>
+          </a>
+        </li>
+      </ul>
+    </li>
     <% end %>
-  </ul>
+  </ol>
 </body>
 </html>
