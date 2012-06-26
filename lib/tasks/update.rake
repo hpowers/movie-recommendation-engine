@@ -71,7 +71,6 @@ module UpdateRottenTomato
     in_theater_list["movies"].each do | rotten_record |
 
       active_movie = Movie.find_or_create_by_title( rotten_record['title'] )
-      active_movie.touch
 
       rotten = RtDatum.find_or_create_by_movie_id( active_movie )
 
@@ -85,11 +84,16 @@ module UpdateRottenTomato
                                  rotten_record['release_dates']['theater'])
 
       # remove old movies from default status
-      if ( Date.today - rotten.release_date > 60 ) && active_movie.default == true
+      if Date.today - rotten.release_date > 60
         active_movie.default = false
-        active_movie.save
       end
-      
+
+      # denote if a movie is released
+      if rotten.release_date < Date.today
+        active_movie.released = true
+      end
+
+      active_movie.save
       rotten.save
     end
   end
@@ -563,14 +567,14 @@ namespace :db do
     UpdateRottenTomato.opening
       decnt.go('tomato opening')
 
-    # # Purge.old_movies(start_time)
+    # Purge.old_movies(start_time)
       decnt.go('purged')
 
-    # # store movies to avoid excess db calls
+    # store movies to avoid excess db calls
     movies = Movie.all
-    #   decnt.go('movie list complete')
+      decnt.go('movie list complete')
 
-    # # update remaining sources
+    # update remaining sources
     UpdateImdb.data(movies)
       decnt.go('imdb')
     UpdateEbert.stars(movies)

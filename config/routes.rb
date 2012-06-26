@@ -1,16 +1,9 @@
 MovieRecommendationEngine::Application.routes.draw do
 
-resources :movies
+  resources :movies, :only => [:index, :show]
 
-  # # not sure if this is necessary at the moment
-  # resources :movies do
-  #   resources :rotten_tomatoes
-  #   resources :imdb_data_points
-  #   resources :tweets
-  #   resources :ebert_stars
-  #   resources :hsx_data_points
-  # end
+  match "/:rank" => 'movies#show'
 
-root to: 'movies#index'
+  root to: 'movies#index'
 
 end

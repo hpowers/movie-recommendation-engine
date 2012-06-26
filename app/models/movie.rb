@@ -8,4 +8,8 @@ class Movie < ActiveRecord::Base
   attr_accessible :default, :score, :title
 
   default_scope order("score DESC")
+  default_scope where(released: true)
+  # default_scope where('score > ?',1)
+  # default_scope limit(10)
+  default_scope where('score > ?',40)
 end
