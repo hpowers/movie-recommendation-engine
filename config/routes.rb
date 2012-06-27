@@ -1,9 +1,9 @@
 MovieRecommendationEngine::Application.routes.draw do
 
-  resources :movies, :only => [:index, :show]
+  resources :movies,   :only => [:index, :show]
+  resources :rankings, :only => [:index, :show]
 
-  match "/:rank" => 'movies#show'
 
-  root to: 'movies#index'
+  root to: 'rankings#index'
 
 end

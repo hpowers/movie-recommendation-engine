@@ -7,13 +7,16 @@
   .movie{
     margin-bottom: 10px;
   }
+  ul{
+    margin-top: 5px;
+  }
   </style>
 </head>
 <body>
   <h1>Movies</h1>
   <ol>
     <% @movies.each do |movie| %>
-    <li class="movie"><b><%= movie.title %></b> - <%= movie.score %>
+    <li class="movie"><b><%= movie.title %></b> - <em><%= movie.score %></em>
       <ul>
         <li>
           <%= (Date.today - movie.rt_datum.release_date).to_i %> days ago - 

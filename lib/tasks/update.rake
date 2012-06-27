@@ -554,39 +554,50 @@ namespace :db do
 
   task update: :environment do
 
-    # this is a logger method to help see where thing go awry
-    decnt = DeCnt.new
+    begin
+        
+      # this is a logger method to help see where thing go awry
+      decnt = DeCnt.new
 
-    # grab a timestamp to delete old movies with
-    start_time = Time.now - 5
+      # grab a timestamp to delete old movies with
+      start_time = Time.now - 5
 
-    # update the movie list, rotten tomato data, and removes old movies
-    # from the default list
-    UpdateRottenTomato.in_theaters
-      decnt.go('tomato theaters')
-    UpdateRottenTomato.opening
-      decnt.go('tomato opening')
+      # update the movie list, rotten tomato data, and removes old movies
+      # from the default list
+      UpdateRottenTomato.in_theaters
+        decnt.go('tomato theaters')
+      UpdateRottenTomato.opening
+        decnt.go('tomato opening')
 
-    # Purge.old_movies(start_time)
-      decnt.go('purged')
+      # Purge.old_movies(start_time)
+        decnt.go('purged')
 
-    # store movies to avoid excess db calls
-    movies = Movie.all
-      decnt.go('movie list complete')
+      # store movies to avoid excess db calls
+      movies = Movie.all
+        decnt.go('movie list complete')
 
-    # update remaining sources
-    UpdateImdb.data(movies)
-      decnt.go('imdb')
-    UpdateEbert.stars(movies)
-      decnt.go('ebert')
-    # this method also sets movie's default status
-    UpdateHsx.data(movies)
-      decnt.go('hsx')
-    # disabled to not irittate the google gods
-    # UpdateTweet.num(movies)
+      # update remaining sources
+      UpdateImdb.data(movies)
+        decnt.go('imdb')
+      UpdateEbert.stars(movies)
+        decnt.go('ebert')
+      # this method also sets movie's default status
+      UpdateHsx.data(movies)
+        decnt.go('hsx')
+      # disabled to not irittate the google gods
+      # UpdateTweet.num(movies)
 
-    # calculate scores
-    Rake::Task['db:score'].execute
-      decnt.go('score')
+      # calculate scores
+      Rake::Task['db:score'].execute
+        decnt.go('score')
+
+    rescue Exception => e
+      
+      puts e
+      puts "now email someone #{output}"
+
+    end
+
+
   end
 end
