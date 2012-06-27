@@ -3,12 +3,7 @@
 <h3>you should see ...</h3>
 <h1><%= @movie.title %></h1>
 
-
-
-<%= link_to 'Next →', ranking_path( @rank + 1 ) %>
-
-
-
+<%= link_to 'Next →', movie_path( @rank + 1 ) %>
 
 <p></p>
 <%= form_for :showtimes do |f| %>

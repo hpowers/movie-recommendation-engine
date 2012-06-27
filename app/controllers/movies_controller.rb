@@ -5,16 +5,18 @@ class MoviesController < ApplicationController
     # @movies = Movie.released.min_score.where(default: true)
 
     # filter results by films playing in zip
-    theater_data = Fandango.movies_near(20024)
+    # theater_data = Fandango.movies_near(20024)
 
-    @movies = Movie.all.select {|movie| theater_data.to_s.include? movie[:title]}
+    # @movies = Movie.all.select {|movie| theater_data.to_s.include? movie[:title]}
+
+    redirect_to movie_path(1) 
   end
 
   def show
 
-    @rank = params[:rank].to_i
+    @rank = params[:id].to_i
 
-    movies = Movie.where(default: true)
+    movies = Movie.released.min_score.where(default: true)
 
     @movie = movies[@rank-1]
 

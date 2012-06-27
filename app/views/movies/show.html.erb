@@ -2,8 +2,9 @@
 
 <h3>you should see ...</h3>
 <h1><%= @movie.title %></h1>
-<a href="/<%= @rank+1 %>">Next →</a> <br>
-<%#= link_to 'next path', movie_path( @rank + 1 ) %>
+
+<%= link_to 'Next →', movie_path( @rank + 1 ) %>
+
 <p></p>
 <%= form_for :showtimes do |f| %>
 <%= f.text_field :zip %> <br>
@@ -12,7 +13,7 @@
 
 <p>
   
-<%#= debug(params) if Rails.env.development? %>
+<%= debug(params) if Rails.env.development? %>
 
 </p>
 

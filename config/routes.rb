@@ -1,9 +1,9 @@
 MovieRecommendationEngine::Application.routes.draw do
 
-  resources :movies,   :only => [:index, :show]
-  resources :rankings, :only => [:index, :show]
-
-
-  root to: 'rankings#index'
+  resources :movies,   :only => [:index, :show] do
+    resources :theaters, only: [:show]
+  end
+  
+  root to: 'movies#index'
 
 end
