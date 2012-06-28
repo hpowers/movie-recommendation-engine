@@ -26,7 +26,7 @@
 <hr>
 
 <p></p>
-<%#= form_for :theaters, url: "/movies/#{@movie_id}/theaters/" do |f| %>
+
 <%= form_for :theaters, url: movie_theaters_path(@id) do |f| %>
 
   <%= f.text_field :zip , value: @zip_code %> <br>

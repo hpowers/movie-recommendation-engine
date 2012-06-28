@@ -6,22 +6,34 @@ class MoviesController < ApplicationController
 
   def show
 
-    @id = params[:id].to_i
+    @id = params[:id]
 
+    # if user has zip code stored, redirect to page with showtimes
     zip_code = cookies[:zip_code]
 
     if !zip_code.nil?
       redirect_to movie_theater_path( @id, zip_code )
     end
 
-    @ranking = @id
+    if @id[0..1] == 'id'
 
-    movies = Movie.released.min_score.where(default: true)
+      @id = @id[2..-1]
 
-    @movie = movies[@ranking-1]
+      @movie = Movie.find( @id )
+      @ranking = 0
 
-    @ranking = 0 if @ranking == movies.size
+      @ranking = 1 if @movie == Movie.released.min_score.where(default: true).first
+      
+    else
+      
+      @ranking = @id.to_i
 
-    
+      movies = Movie.released.min_score.where(default: true)
+
+      @movie = movies[@ranking-1]
+
+      @ranking = 0 if @ranking == movies.size
+
+    end
   end
 end
