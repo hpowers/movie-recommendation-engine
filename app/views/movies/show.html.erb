@@ -1,14 +1,20 @@
 <center>
 
-<h3>you should see ...</h3>
-<h1><%= @movie.title %></h1>
+<%# render :partial => 'shared/you_should_see', 
+           :locals => { :title => @movie.title } %>
 
-<%= link_to 'Next →', movie_path( @rank + 1 ) %>
+<%= render @movie %>
+
+<%= link_to 'Next →', movie_path( @ranking + 1 ) %>
 
 <p></p>
-<%= form_for :showtimes do |f| %>
-<%= f.text_field :zip %> <br>
-<%= f.submit 'Get Showtimes' %>
+
+<%= form_for :theaters, url: movie_theaters_path(@id) do |f| %>
+
+  <%= f.text_field :zip, value: @zip_code %> <br>
+  <%= f.hidden_field :movie_id, value: "id#{@movie.id}" %>
+  <%= f.submit 'Get Showtimes' %>
+
 <% end %>
 
 <p>

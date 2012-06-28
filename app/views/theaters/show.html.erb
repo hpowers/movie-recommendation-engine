@@ -1,14 +1,37 @@
 <center>
 
-<h3>you should see ...</h3>
-<h1><%= @movie.title %></h1>
+<%= render @movie %>
 
-<%= link_to 'Next →', movie_path( @rank + 1 ) %>
+<%= link_to "Next →", movie_theater_path( @ranking+1, @zip_code ) %>
+
+<hr>
+
+<h4>Showtimes for <%= @zip_code %></h4>
+
+<div id="showtimes">
+  
+  <ul><b>Theater One</b>
+    <li>Showtime 1</li>
+    <li>Showtime 2</li>
+    <li>Showtime 3</li>
+  </ul>
+  <ul><b>Theater Two</b>
+    <li>Showtime 1</li>
+    <li>Showtime 2</li>
+    <li>Showtime 3</li>
+  </ul>
+
+</div>
+
+<hr>
 
 <p></p>
-<%= form_for :showtimes do |f| %>
-<%= f.text_field :zip %> <br>
-<%= f.submit 'Get Showtimes' %>
+<%#= form_for :theaters, url: "/movies/#{@movie_id}/theaters/" do |f| %>
+<%= form_for :theaters, url: movie_theaters_path(@id) do |f| %>
+
+  <%= f.text_field :zip , value: @zip_code %> <br>
+  <%= f.submit 'Update Showtimes' %>
+
 <% end %>
 
 <p>
