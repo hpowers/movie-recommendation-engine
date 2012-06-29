@@ -1,43 +1,81 @@
 <center>
 
-<%= render @movie %>
+<br><br>
 
-<%= link_to "Next →", movie_theater_path( @ranking+1, @zip_code ) %>
+<h3>you should see ...</h3>
+<h1><%= @recommendation.title %></h1>
+
+<br><br>
+
+<%= link_to "Next →", movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :class => "btn btn-primary" %>
 
 <hr>
 
-<h4>Showtimes for <%= @zip_code %></h4>
+<h4>Showtimes for <%= @recommendation.zip_code %></h4>
+
+<%#= @recommendation.theaters.inspect %>
+<%#= @theater_data.inspect %>
 
 <div id="showtimes">
   
-  <ul><b>Theater One</b>
-    <li>Showtime 1</li>
-    <li>Showtime 2</li>
-    <li>Showtime 3</li>
-  </ul>
-  <ul><b>Theater Two</b>
-    <li>Showtime 1</li>
-    <li>Showtime 2</li>
-    <li>Showtime 3</li>
+  <ul>
+
+    <% @recommendation.showtime_information.each do |theater_hash| %>
+
+      <li>
+        <b> <%= theater_hash[:theater][:name]    %> </b> - 
+            <%= theater_hash[:theater][:address] %>
+      </li>
+
+      <ul class="times">
+
+      <% theater_hash[:showtimes].each do |time, url| %>
+
+        <% if url.empty? %>
+
+          <li>
+            <%= time %>
+          </li>
+
+        <% else %>
+
+            <li>
+              <a href="<%=url%>"> <%= time %> </a>
+            </li>
+
+        <% end %>
+
+      <% end %>
+
+    </ul>
+
+    <% end %>
+
+    <% if @recommendation.showtime_information.empty? %>
+
+      <li>Sorry, this movie is not playing in your area.</li>
+    
+    <% end %>
+
   </ul>
 
 </div>
 
 <hr>
 
-<p></p>
+<br><br><br><br><br><br>
 
-<%= form_for :theaters, url: movie_theaters_path(@id) do |f| %>
+<%= form_for :theaters, url: movie_theaters_path(@recommendation.id) do |f| %>
 
-  <%= f.text_field :zip , value: @zip_code %> <br>
+  <%= f.text_field :zip , value: @recommendation.zip_code %> <br>
+  <%= f.hidden_field :movie_id, :value => "id#{@recommendation.id}" %>
   <%= f.submit 'Update Showtimes' %>
 
 <% end %>
 
-<p>
+<br><br>
   
 <%= debug(params) if Rails.env.development? %>
 
-</p>
 
 </center>

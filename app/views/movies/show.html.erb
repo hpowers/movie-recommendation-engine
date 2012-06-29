@@ -1,26 +1,26 @@
 <center>
 
-<%# render :partial => 'shared/you_should_see', 
-           :locals => { :title => @movie.title } %>
+<br><br>
 
 <%= render @movie %>
 
-<%= link_to 'Next →', movie_path( @ranking + 1 ) %>
+<br><br>
 
-<p></p>
+<%= link_to 'Next →', movie_path( @ranking + 1 ), :class => "btn btn-primary" %>
+
+<br><br><br><br><br><br>
 
 <%= form_for :theaters, url: movie_theaters_path(@id) do |f| %>
 
-  <%= f.text_field :zip, value: @zip_code %> <br>
-  <%= f.hidden_field :movie_id, value: "id#{@movie.id}" %>
-  <%= f.submit 'Get Showtimes' %>
+  <%= f.text_field :zip, :placeholder => "zip code" %> <br>
+  <%= f.hidden_field :movie_id, :value => "id#{@movie.id}" %>
+  <%= f.submit 'Get Showtimes', class: 'btn' %>
 
 <% end %>
 
-<p>
+<br><br>
   
 <%= debug(params) if Rails.env.development? %>
 
-</p>
 
 </center>

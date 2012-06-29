@@ -12,7 +12,7 @@
  *= require_tree .
  */
 
-a {
+/*a {
   color: blue;
   text-decoration: none;
 }
@@ -23,7 +23,7 @@ a:hover {
 
 a:visited {
   color: blue;
-}
+}*/
 
 span {
   color: #acacac;
