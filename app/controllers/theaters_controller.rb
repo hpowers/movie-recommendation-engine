@@ -4,34 +4,33 @@ class TheatersController < ApplicationController
 
   def show
 
-    @recommendation = Recommendations.new( params[:movie_id], params[:id]  )
+    @recommendation = Recommendations.new( params[:movie_id], params[:id] )
 
   end
 
   def create
 
-    @movie_id = params[:movie_id].to_i
-    @zip_code = params[:theaters][:zip].to_i
-    @id       = params[:theaters][:movie_id]
+    @zip_code = params[:theaters][:zip]
 
-    # make sure it looks like a zip code
-    if @zip_code.to_s.length <= 4
-      destroy
+    if @zip_code.to_i.to_s.length == 5
+
+      cookies.permanent[:zip_code] = @zip_code.to_i
+      redirect_to movie_theater_path( params[:theaters][:movie_id] , @zip_code )
+
     else
-      cookies.permanent[:zip_code] = @zip_code
-      redirect_to movie_theater_path( @id, @zip_code )
+      # kill it with fire
+      destroy
+
     end
 
   end
 
   def destroy
-    @id = params[:theaters][:movie_id]
 
     cookies.delete(:zip_code)
-    redirect_to movie_path(@id)
+    redirect_to movie_path( params[:theaters][:movie_id] )
 
   end
-
 end
 
 

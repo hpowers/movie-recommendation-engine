@@ -12,6 +12,7 @@
 <hr>
 
 <h4>Showtimes for <%= @recommendation.zip_code %></h4>
+<br>
 
 <%#= @recommendation.theaters.inspect %>
 <%#= @theater_data.inspect %>
@@ -63,7 +64,7 @@
 
 <hr>
 
-<br><br><br><br><br><br>
+<br><br><br><br>
 
 <%= form_for :theaters, url: movie_theaters_path(@recommendation.id) do |f| %>
 

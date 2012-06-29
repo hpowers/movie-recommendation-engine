@@ -1,42 +1,47 @@
+# Builds recommendations based on movies playing in a specified zip code
+
 class Recommendations
 
   attr_reader :title, :link, :showtimes, :id, :ranking, :zip_code
 
-  def initialize( request_number, zip )
-    @zip_code = zip.to_i
-    @data = Fandango.movies_near(@zip_code)
+  def initialize(request_number, zip)
 
-    movies = Movie.released.select {|movie| @data.to_s.include? movie[:title]}
-
+    @zip_code       = zip.to_i
+    @data           = Fandango.movies_near(@zip_code)
     @request_number = request_number
+
+    # select movies from the db playing in specified zip
+    movies = Movie.released.select {|movie| @data.to_s.include? movie[:title]}
+    
+    # check if request is for a specific id, oppose to general ranking request
     if @request_number[0..1] == 'id'
 
+      # specific titles use a request format of 'id321' where 321 is the db id
       movie = Movie.find( @request_number[2..-1] )
       
       @title = movie.title
-      @id = movie.id
+      @id    = movie.id
       
+      # check if requested movie is equal to first recommendation.
       if movie == movies[0]
+        # adjust ranking to skip first recommendation
         @ranking = 1
       else
         @ranking = 0
       end
 
     else
-      @request_number = @request_number.to_i
+
+      @ranking = @request_number = @request_number.to_i
+
+      movie    = movies[@request_number - 1]
+      @title   = movie.title
+      @id      = movie.id
       
-      movie = movies[@request_number - 1]
-      @title = movie.title
-      @id = movie.id
-      
-      if @request_number == movies.size
-        @ranking = 0
-      else
-        @ranking = @request_number
-      end
+      # reset ranking if this is the last movie on the list
+      @ranking = 0 if @request_number == movies.size
 
     end
-
   end
 
   def showtimes(theater)
@@ -44,16 +49,17 @@ class Recommendations
     # lowercased space free version of the theatre name with special id
     theater_identity = theater[:name].gsub(/\W/,'').downcase + '_' + theater[:id]
 
-    theater_url = "http://www.fandango.com/#{theater_identity}/theaterpage"
+    theater_url  = "http://www.fandango.com/#{theater_identity}/theaterpage"
     theater_page = Nokogiri::HTML(open(theater_url))
 
+    # the page has showtimes for every movie.  find ones that match our title
     matching_title = theater_page.css('#showtimes ul.showtimes').select do |movie|
       movie.at_css('h4 a').text.include?(title)
     end
 
     showtimes_hash = {}
-
     matching_title.each do |showtimes|
+
       # find showtimes for past shows and non ticketable shows
       showtimes.css('.times li.past','.times li.timeNonWired').each do |time|
         showtimes_hash[time.text]=''
@@ -65,7 +71,7 @@ class Recommendations
       end
     end
 
-    # make sure we return a chronological hash
+    # make sure showtimes are in chronological order
     return showtimes_hash.sort_by do | time , url |
       Time.parse(time.gsub(/a/,'am').gsub(/p/,'pm'))
     end
@@ -73,29 +79,31 @@ class Recommendations
   end
 
   def showtime_information
+
     informatation_array = []
+    
     theaters.each do |theater|
-      informatation_array << {
-        theater: theater,
-        showtimes: showtimes(theater)
-      }
+      informatation_array << { theater: theater, showtimes: showtimes(theater) }
     end
-    return informatation_array
+    
+    informatation_array
   end
 
   def theaters(limit=3)
+
     theater_data = @data
     theater_list = []
 
     theater_data.each do |theater_hash|
-      # see if the movie is playing in a theater
-      # movie_found = theater_hash[:movies].find{|movie| movie[:title]==title}
-      movie_found = theater_hash[:movies].find{|movie| movie[:title].include? title}
 
-      theater_list.push(theater_hash[:theater]) if movie_found
+      # see if the movie is playing in a theater
+      if theater_hash[:movies].find{|movie| movie[:title].include? title}
+        # add theater to the list
+        theater_list.push(theater_hash[:theater])
+      end
+
     end
 
-    return theater_list[0,limit]
+    theater_list[0,limit]
   end
-
 end
