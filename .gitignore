@@ -49,4 +49,5 @@ Thumbs.db
 
 # databases #
 #############
-*.sqlite3
+*.sqlite3config/newrelic.yml
+db/development.sqlite3
