@@ -3,6 +3,7 @@
 /.bundle
 bundler_stubs/
 .rvmrc
+config/newrelic.yml
 
 # Compiled source #
 ###################
@@ -49,5 +50,5 @@ Thumbs.db
 
 # databases #
 #############
-*.sqlite3config/newrelic.yml
+*.sqlite3
 db/development.sqlite3

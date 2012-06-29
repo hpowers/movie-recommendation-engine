@@ -2,18 +2,29 @@
 
 <br><br>
 
-<%= render @movie %>
+<%#= render @movie %>
+<h3>you should see ...</h3>
+<h1><%= @recommendation.movie.title %></h1>
 
 <br><br>
 
-<%= link_to 'Next →', movie_path( @ranking + 1 ), :class => "btn btn-primary" %>
+<%= link_to 'Next →', movie_path( @recommendation.ranking + 1 ), :class => "btn btn-primary" %>
 
-<br><br><br><br><br><br>
+<hr>
+
+<div class="container">
+    <p>
+      <b>SCORED <%= @recommendation.movie.score %></b> - 
+      <%= @recommendation.movie.rt_datum.critics_consensus %>    
+    </p>
+</div>
+
+<hr>
 
 <%= form_for :theaters, url: movie_theaters_path(@id) do |f| %>
 
   <%= f.text_field :zip, :placeholder => "zip code" %> <br>
-  <%= f.hidden_field :movie_id, :value => "id#{@movie.id}" %>
+  <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
   <%= f.submit 'Get Showtimes', class: 'btn' %>
 
 <% end %>

@@ -33,4 +33,3 @@ class TheatersController < ApplicationController
   end
 end
 
-

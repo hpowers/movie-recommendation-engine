@@ -2,28 +2,34 @@
 
 class Recommendations
 
-  attr_reader :title, :link, :showtimes, :id, :ranking, :zip_code
+  attr_reader :title, :link, :showtimes, :ranking, :zip_code, :movie
 
-  def initialize(request_number, zip)
+  def initialize(request_number, zip=nil)
 
-    @zip_code       = zip.to_i
-    @data           = Fandango.movies_near(@zip_code)
+    @zip_code       = zip
     @request_number = request_number
 
-    # select movies from the db playing in specified zip
-    movies = Movie.released.select {|movie| @data.to_s.include? movie[:title]}
+    if @zip_code
+
+      @data  = Fandango.movies_near(@zip_code)
+
+      # select movies from the db playing in specified zip      
+      movies = Movie.released.select {|movie| @data.to_s.include? movie[:title]}  
+
+    else
+
+      movies = Movie.released.min_score.where(default: true)
+
+    end
     
     # check if request is for a specific id, oppose to general ranking request
     if @request_number[0..1] == 'id'
 
       # specific titles use a request format of 'id321' where 321 is the db id
-      movie = Movie.find( @request_number[2..-1] )
-      
-      @title = movie.title
-      @id    = movie.id
+      @movie = Movie.find( @request_number[2..-1] )
       
       # check if requested movie is equal to first recommendation.
-      if movie == movies[0]
+      if @movie == movies[0]
         # adjust ranking to skip first recommendation
         @ranking = 1
       else
@@ -33,15 +39,16 @@ class Recommendations
     else
 
       @ranking = @request_number = @request_number.to_i
-
-      movie    = movies[@request_number - 1]
-      @title   = movie.title
-      @id      = movie.id
+      @movie   = movies[@request_number - 1]
       
       # reset ranking if this is the last movie on the list
       @ranking = 0 if @request_number == movies.size
 
     end
+  end
+
+  def title
+    @movie.title
   end
 
   def showtimes(theater)
