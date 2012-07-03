@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120626033113) do
+ActiveRecord::Schema.define(:version => 20120703135356) do
 
   create_table "ebert_data", :force => true do |t|
     t.float    "stars",      :default => 0.0
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120626033113) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "released",   :default => false
+    t.string   "videoid"
   end
 
   add_index "movies", ["default"], :name => "index_movies_on_default"
