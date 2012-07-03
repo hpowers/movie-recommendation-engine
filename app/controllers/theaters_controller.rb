@@ -3,9 +3,7 @@ require 'recommendations'
 class TheatersController < ApplicationController
 
   def show
-
     @recommendation = Recommendations.new( params[:movie_id], params[:id] )
-
   end
 
   def create
@@ -20,7 +18,6 @@ class TheatersController < ApplicationController
     else
       # kill it with fire
       destroy
-
     end
 
   end
