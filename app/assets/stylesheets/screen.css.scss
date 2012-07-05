@@ -4,7 +4,74 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+@import "compass/utilities/general/clearfix";
+@import "compass/css3";
 
+$gradient_bg_light: #fafafa;
+$gradient_bg_dark: #b8b8b8;
+$button_bg_dark: #9d9d9d;
+
+html{
+  height:100%;
+}
+
+body{
+  text-align:center;
+  font-family:'Open Sans', sans-serif;
+}
+
+#container{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:320px;
+  height:356px;
+  margin-top: -178px;
+  margin-left:-160px;
+  background: $gradient_bg_dark;
+  @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
+}
+
+h3{
+  margin-top:40px;
+  font-size:24px;
+  margin-bottom:5px;
+}
 h1{
-  font-size:25px;
+  font-size:64px;
+  margin-bottom:35px;
+}
+
+
+header{
+  background:black;
+  color:#EEE;
+  @include clearfix;
+  padding:10px;
+  #info{
+    float:left;
+    // margin-left:20px;
+  }
+  #showtimes{
+    float:right;
+  }
+}
+
+footer{
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  @include opacity(.8);
+}
+
+#recommendation{
+
+    span{
+      padding:10px;
+      background: $button_bg_dark;
+      // background: purple;
+      color:#EEE;
+      @include border-radius(100%); 
+    }
+  
 }
