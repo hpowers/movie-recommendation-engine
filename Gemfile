@@ -30,6 +30,11 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'factory_girl_rails'
+
+  # Live Reload
+  gem 'rb-fsevent'
+  gem 'guard-livereload'
+  
 end
 
 gem 'jquery-rails'
