@@ -1,0 +1,11 @@
+rt1:
+  movie_id: 1
+  critics_consensus: 'good'
+
+rt2:
+  movie_id: 2
+  critics_consensus: 'good'
+
+rt3:
+  movie_id: 3
+  critics_consensus: 'good'

@@ -1,37 +1,28 @@
 require 'spec_helper'
-# require 'capybara/rspec'
-
 
 describe "default page" do
 
   before do
+    50.times { FactoryGirl.create(:movie) }
 
-    movie = Movie.create!({title:'Bloc X: Bloc in Space', 
-          score: 70, released: true, default: true}, :without_protection => true)
-
-    rotten = RtDatum.find_or_create_by_movie_id( movie.id )
-    rotten.critics_consensus = 'good'
-    rotten.save
-
-    movie = Movie.create!({title:'Bloc III: Return of Bloc', 
-          score: 95, released: true, default: true}, :without_protection => true)
-
-    rotten = RtDatum.find_or_create_by_movie_id( movie.id )
-    rotten.critics_consensus = 'good'
-    rotten.save
-
-    movie = Movie.create!({title:'Bloc II: Bloc to the future', 
-          score: 90, released: true, default: true}, :without_protection => true)
-
-    rotten = RtDatum.find_or_create_by_movie_id( movie.id )
-    rotten.critics_consensus = 'good'
-    rotten.save
-    
+    FactoryGirl.create(:movie, 
+                        title: 'Bloc III: Return of Bloc',
+                        score: 100)
   end
 
-  before {}
+
+  it "references more than 50 movies"
+
+  it "redirects to movies#index"
+
+  it "shows the top ranking movie"
+
+  it "links to the next movie"
+
+  it "has a form for showtimes"
   
   it "redirect to the top ranked movie" do
+    # puts "count: #{Movie.count}"
     visit '/'
     # save_and_open_page
     page.should have_content('you should see ...')

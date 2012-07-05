@@ -52,6 +52,11 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (3.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (3.5.0)
+      factory_girl (~> 3.5.0)
+      railties (>= 3.0.0)
     fandango (1.0.0)
       nokogiri (~> 1.0)
     ffi (1.0.11)
@@ -148,6 +153,7 @@ DEPENDENCIES
   awesome_print
   capybara
   coffee-rails (~> 3.2.1)
+  factory_girl_rails
   fandango
   jquery-rails
   json

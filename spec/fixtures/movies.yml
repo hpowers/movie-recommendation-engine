@@ -1,0 +1,20 @@
+blocx:
+  id: 1
+  title: 'Bloc X: Bloc in Space'
+  score: 70
+  released: true
+  default: true
+
+block3:
+  id: 2
+  title: 'Bloc III: Return of Bloc'
+  score: 95
+  released: true
+  default: true
+
+block2:
+  id: 3
+  title: 'Bloc II: Bloc to the future'
+  score: 90
+  released: true
+  default: true
