@@ -1,32 +1,42 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
-describe "default page" do
+describe "Default page" do
 
   before do
-    50.times { FactoryGirl.create(:movie) }
+    2.times { FactoryGirl.create(:movie) }
 
-    FactoryGirl.create(:movie, 
-                        title: 'Bloc III: Return of Bloc',
-                        score: 100)
+    # top-ranking movie
+    FactoryGirl.create(:movie, title: 'Bloc III: Return of Bloc', score: 100)
+
+    visit root_path
   end
 
+  subject { page }
 
-  it "references more than 50 movies"
+  it { Movie.count.should be > 2 }
 
-  it "redirects to movies#index"
+  it { current_path.should be == movie_path(1) }
 
-  it "shows the top ranking movie"
-
-  it "links to the next movie"
-
-  it "has a form for showtimes"
-  
-  it "redirect to the top ranked movie" do
-    # puts "count: #{Movie.count}"
-    visit '/'
-    # save_and_open_page
-    page.should have_content('you should see ...')
-    page.should have_content('Bloc III: Return of Bloc')
+  it "should show the top ranking movie" do
+    should have_selector('h1', text: 'Bloc III: Return of Bloc')
   end
 
+  it "should link to the next movie" do
+    click_link 'Next →'
+    current_path.should be == movie_path(2)
+  end
+
+  it { should have_selector 'input#theaters_zip' }
+
+  context "when a zip_code cookie is present" do
+
+    before do
+      # create the cookie?
+    end
+
+    it "should redirect to showtime page for top ranking movie"
+
+  end
 end
