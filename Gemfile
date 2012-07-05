@@ -27,14 +27,19 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'capybara'
-  gem 'launchy'
-  gem 'factory_girl_rails'
+  gem 'guard-rspec'
 
   # Live Reload
   gem 'rb-fsevent'
   gem 'guard-livereload'
-  
+end
+
+group :test do
+  gem 'capybara'
+  gem 'launchy'
+  gem 'factory_girl_rails'
+  gem 'guard-spork', '0.3.2'  
+  gem 'spork', '0.9.0'
 end
 
 gem 'jquery-rails'
