@@ -1,4 +1,4 @@
-new MBP.hideUrlBar();
+// new MBP.hideUrlBar();
 
 $(document).ready(function() {
   // Stuff to do as soon as the DOM is ready;
@@ -9,5 +9,6 @@ $(document).ready(function() {
   $('#showtimes').click(function(event) {
     // Act on the event
     var count = prompt("Enter Your Zip Code");
+    return false;
   });
 });

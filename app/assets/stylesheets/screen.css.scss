@@ -1,14 +1,15 @@
-@import "compass/reset";
-@import "compass/utilities/general/clearfix";
-@import "compass/css3";
-@import "compass/typography/lists/inline-block-list";
+@import "base";
 
 $gradient_bg_light: #fafafa;
 $gradient_bg_dark: #b8b8b8;
-$button_bg_dark: #9d9d9d;
+
+$dark_gray: #9d9d9d;
 
 $black: #222;
 $white: #e4e7e7;
+$true_black: #000;
+
+$df: #4A525A;
 
 html{
   height:100%;
@@ -29,7 +30,6 @@ a{
   color: $black;
   &:hover{
     color: $black;
-    // @include scale(1.05);
   }
   display:inline-block;
   &:visited{
@@ -41,8 +41,12 @@ b{
   font-weight:600;
 }
 
+#container{
+  height:100%;
+}
+
 body{
-  background: #4A525A;
+  background: $df;
   #container{
     position:absolute;
     height:430px;
@@ -72,7 +76,7 @@ header{
       color:$white;
     }
   }
-  background:black;
+  background:$true_black;
   
   @include clearfix;
   padding:10px;
@@ -98,7 +102,7 @@ header{
   background: $gradient_bg_light;
   text-align: left;
   padding:10px;
-  @include box-shadow($button_bg_dark 0 0 10px);
+  @include box-shadow($dark_gray 0 0 10px);
   #trailer{
     margin:10px 0 2px;
   }
@@ -117,12 +121,12 @@ header{
   span{
     font-size:25px;
     padding:10px;
-    background: $button_bg_dark;
+    background: $dark_gray;
     color:$white;
     @include border-radius(100%); 
   }
   #rating{
-    background: $button_bg_dark;
+    background: $dark_gray;
     color:$white;
     font-size:25px;
     line-height:25px;
@@ -148,7 +152,7 @@ header{
 #next{
   margin:auto;
   width:180px;
-  background: adjust-lightness($button_bg_dark,10);
+  background: adjust-lightness($dark_gray,10);
   padding: 7px;
   margin-bottom:20px;
   font-size:20px;
@@ -156,7 +160,7 @@ header{
 
 #showtimes #next{
   width:180px;
-  background: adjust-lightness($button_bg_dark,20);
+  background: adjust-lightness($dark_gray,20);
   font-size:16px;
   margin:auto;
   padding:5px;
@@ -173,7 +177,7 @@ header{
     background: $gradient_bg_light;
     padding:7px 0;
     margin-bottom:9px;
-    @include box-shadow(adjust-lightness($button_bg_dark,20) 0 0 5px);
+    @include box-shadow(adjust-lightness($dark_gray,20) 0 0 5px);
     &:last-child{
       display:none;
     }
@@ -190,12 +194,12 @@ header{
   }
   ul.times{
     @include inline-block-list;
-    color: $button_bg_dark;
+    color: $dark_gray;
     font-size:12px;
     padding-bottom: 5px;
     li{
       padding: 0 5px;
-      border-right:1px solid $button_bg_dark;
+      border-right:1px solid $dark_gray;
       &:last-child{
         border:none;
       }
