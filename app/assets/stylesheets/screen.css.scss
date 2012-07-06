@@ -1,7 +1,6 @@
 @import "compass/reset";
 @import "compass/utilities/general/clearfix";
 @import "compass/css3";
-// @import "compass/css3/box-shadow";
 @import "compass/typography/lists/inline-block-list";
 
 $gradient_bg_light: #fafafa;
@@ -13,14 +12,20 @@ $white: #e4e7e7;
 
 html{
   height:100%;
+  min-height:420px;
 }
 
 body{
   text-align:center;
   font-family:'Open Sans', sans-serif;
+  font-size:16px;
+  color: $black;
+  background:$gradient_bg_dark;
+  @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
 }
 
 a{
+  text-decoration:none;
   color: $black;
   &:hover{
     color: $black;
@@ -32,23 +37,43 @@ a{
   }
 }
 
-#container{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:320px;
-  height:420px;
-  margin-top: -210px;
-  margin-left:-160px;
-  background: $gradient_bg_dark;
-  @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
+b{
+  font-weight:600;
 }
 
-
+body{
+  background: #4A525A;
+  #container{
+    position:absolute;
+    height:430px;
+    top:50%;
+    left:50%;
+    width:330px;
+    margin-top: -210px;
+    margin-left:-160px;
+    background:$gradient_bg_dark;
+    @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
+    overflow:scroll;
+    overflow-x:hidden;
+  }
+}
+#showtimes #container{
+  width:320px;
+  overflow:hidden;
+}
 
 header{
+  a{
+    color:$white;
+    &:hover{
+      color:$white;
+    }
+    &:visited{
+      color:$white;
+    }
+  }
   background:black;
-  color:#EEE;
+  
   @include clearfix;
   padding:10px;
   #info{
@@ -67,10 +92,22 @@ header{
   }
 }
 
+#info_box{
+  font-size: 12px;
+  display:none;
+  background: $gradient_bg_light;
+  text-align: left;
+  padding:10px;
+  @include box-shadow($button_bg_dark 0 0 10px);
+  #trailer{
+    margin:10px 0 2px;
+  }
+}
+
 #recommendation{
   h1{
     font-size:64px;
-    margin-bottom:35px;
+    margin-bottom:25px;
   }  
   h3{
     margin-top:40px;
@@ -78,11 +115,24 @@ header{
     margin-bottom:5px;
   }
   span{
+    font-size:25px;
     padding:10px;
     background: $button_bg_dark;
-    color:#EEE;
+    color:$white;
     @include border-radius(100%); 
   }
+  #rating{
+    background: $button_bg_dark;
+    color:$white;
+    font-size:25px;
+    line-height:25px;
+    padding:10px;
+    width: 28px;
+    height: 28px;
+    margin:auto;
+    @include border-radius(100%); 
+  }
+  margin-bottom:30px;
 }
 
 #showtimes #recommendation{
@@ -95,16 +145,29 @@ header{
   span{ display:none; }
 }
 
+#next{
+  margin:auto;
+  width:180px;
+  background: adjust-lightness($button_bg_dark,10);
+  padding: 7px;
+  margin-bottom:20px;
+  font-size:20px;
+}
+
 #showtimes #next{
   width:180px;
   background: adjust-lightness($button_bg_dark,20);
-
+  font-size:16px;
   margin:auto;
   padding:5px;
   margin-bottom:20px;
 }
 
 #theaters{
+
+  a{
+    text-decoration:underline;
+  }
 
   .listing{
     background: $gradient_bg_light;
@@ -144,10 +207,10 @@ footer{
   position: absolute;
   bottom: 10px;
   width: 100%;
-  @include opacity(.6);
 }
 
 #showtimes footer{
   position: relative;
   padding-top:10px;
+  @include opacity(.6);
 }

@@ -5,29 +5,27 @@ require 'spec_helper'
 describe "Default page" do
 
   before do
-    2.times { FactoryGirl.create(:movie) }
+    2.times    { FactoryGirl.create(:movie) }
 
-    @top_movie = FactoryGirl.create(:movie, title: 'Bloc III: Return of Bloc',
-                                            score: 100)
+    @top_movie = FactoryGirl.create(:movie, score: 100)
+
     visit root_path
   end
 
   subject { page }
 
-  it { Movie.count.should be > 2 }
+  it { Movie.count.should be == 3 }
 
   it { current_path.should be == movie_path(1) }
 
-  it "should show the top ranking movie" do
-    should have_selector('h1', text: @top_movie.title)
-  end
+  it { should have_selector 'h1', text: @top_movie.title }
+
+  it { should have_selector 'input#theaters_zip' }
 
   it "should link to the next movie" do
     click_link 'Next →'
     current_path.should be == movie_path(2)
   end
-
-  it { should have_selector 'input#theaters_zip' }
 
   context "when a zip_code cookie is present" do
 

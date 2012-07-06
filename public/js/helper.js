@@ -21,7 +21,6 @@ MBP.gestureStart = function () {
   MBP.viewportmeta.content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
 };
 
-
 /*
   * Normalized hide address bar for iOS & Android
   * (c) Scott Jehl, scottjehl.com
