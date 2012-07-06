@@ -7,9 +7,8 @@ describe "Default page" do
   before do
     2.times { FactoryGirl.create(:movie) }
 
-    # top-ranking movie
-    FactoryGirl.create(:movie, title: 'Bloc III: Return of Bloc', score: 100)
-
+    @top_movie = FactoryGirl.create(:movie, title: 'Bloc III: Return of Bloc',
+                                            score: 100)
     visit root_path
   end
 
@@ -20,7 +19,7 @@ describe "Default page" do
   it { current_path.should be == movie_path(1) }
 
   it "should show the top ranking movie" do
-    should have_selector('h1', text: 'Bloc III: Return of Bloc')
+    should have_selector('h1', text: @top_movie.title)
   end
 
   it "should link to the next movie" do
@@ -32,11 +31,18 @@ describe "Default page" do
 
   context "when a zip_code cookie is present" do
 
-    before do
-      # create the cookie?
+    it "should redirect to showtime page for top ranking movie" do
+
+      zip_code = 20024
+      page.driver.browser.set_cookie "zip_code=#{zip_code}"
+
+      Fandango.stub(:movies_near) { [@top_movie.title] }
+      Recommendations.any_instance.stub(:showtime_information) { [] }
+
+      visit root_path
+
+      current_path.should be == movie_theater_path( 1, zip_code )
+
     end
-
-    it "should redirect to showtime page for top ranking movie"
-
   end
 end

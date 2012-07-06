@@ -1,7 +1,7 @@
 FactoryGirl.define do
 	factory :movie do
 		sequence(:title) { |i| "Title#{i}" }
-		score { rand(1..99) }
+		score { rand(50..99) }
 		released true
 		default true
 		videoid '123'
