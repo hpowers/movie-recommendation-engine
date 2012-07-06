@@ -1,15 +1,15 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-
 @import "compass/reset";
 @import "compass/utilities/general/clearfix";
 @import "compass/css3";
+// @import "compass/css3/box-shadow";
+@import "compass/typography/lists/inline-block-list";
 
 $gradient_bg_light: #fafafa;
 $gradient_bg_dark: #b8b8b8;
 $button_bg_dark: #9d9d9d;
+
+$black: #222;
+$white: #e4e7e7;
 
 html{
   height:100%;
@@ -20,27 +20,30 @@ body{
   font-family:'Open Sans', sans-serif;
 }
 
+a{
+  color: $black;
+  &:hover{
+    color: $black;
+    // @include scale(1.05);
+  }
+  display:inline-block;
+  &:visited{
+    color: $black;
+  }
+}
+
 #container{
   position:absolute;
   top:50%;
   left:50%;
   width:320px;
-  height:356px;
-  margin-top: -178px;
+  height:420px;
+  margin-top: -210px;
   margin-left:-160px;
   background: $gradient_bg_dark;
   @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
 }
 
-h3{
-  margin-top:40px;
-  font-size:24px;
-  margin-bottom:5px;
-}
-h1{
-  font-size:64px;
-  margin-bottom:35px;
-}
 
 
 header{
@@ -50,10 +53,90 @@ header{
   padding:10px;
   #info{
     float:left;
-    // margin-left:20px;
   }
   #showtimes{
     float:right;
+  }
+}
+
+#showtimes header{
+  span{
+    color: adjust-lightness(#000,20);
+    padding: 0 5px;
+    margin-left:10px;
+  }
+}
+
+#recommendation{
+  h1{
+    font-size:64px;
+    margin-bottom:35px;
+  }  
+  h3{
+    margin-top:40px;
+    font-size:24px;
+    margin-bottom:5px;
+  }
+  span{
+    padding:10px;
+    background: $button_bg_dark;
+    color:#EEE;
+    @include border-radius(100%); 
+  }
+}
+
+#showtimes #recommendation{
+  h1{
+    margin-bottom:20px;
+  }
+  h3{
+    margin-top:5px;
+  }
+  span{ display:none; }
+}
+
+#showtimes #next{
+  width:180px;
+  background: adjust-lightness($button_bg_dark,20);
+
+  margin:auto;
+  padding:5px;
+  margin-bottom:20px;
+}
+
+#theaters{
+
+  .listing{
+    background: $gradient_bg_light;
+    padding:7px 0;
+    margin-bottom:9px;
+    @include box-shadow(adjust-lightness($button_bg_dark,20) 0 0 5px);
+    &:last-child{
+      display:none;
+    }
+  }
+
+  ul{
+    padding:0;
+    list-style:none;
+    margin-bottom:10px;
+    li.theater{
+      padding-bottom:5px;
+      span{ display:none }
+    }
+  }
+  ul.times{
+    @include inline-block-list;
+    color: $button_bg_dark;
+    font-size:12px;
+    padding-bottom: 5px;
+    li{
+      padding: 0 5px;
+      border-right:1px solid $button_bg_dark;
+      &:last-child{
+        border:none;
+      }
+    }
   }
 }
 
@@ -61,17 +144,10 @@ footer{
   position: absolute;
   bottom: 10px;
   width: 100%;
-  @include opacity(.8);
+  @include opacity(.6);
 }
 
-#recommendation{
-
-    span{
-      padding:10px;
-      background: $button_bg_dark;
-      // background: purple;
-      color:#EEE;
-      @include border-radius(100%); 
-    }
-  
+#showtimes footer{
+  position: relative;
+  padding-top:10px;
 }
