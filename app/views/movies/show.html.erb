@@ -1,39 +1,33 @@
-<center>
+<header>
 
-<iframe width="853" height="480" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+  <a href="#" id="info">&nbsp;&nbsp;i&nbsp;&nbsp;</a>
+  <a href="#" id="showtimes" >SHOWTIMES</a>
 
-<br><br>
+</header>
 
-<%#= render @movie %>
-<h3>you should see ...</h3>
-<h1><%= @recommendation.movie.title %></h1>
+<div id="main" role="main">
 
-<br><br>
-
-<%= link_to 'Next →', movie_path( @recommendation.ranking + 1 ), :class => "btn btn-primary" %>
-
-<hr>
-
-<div class="container">
+  <div id="info_box">
+    
     <p>
-      <b>SCORED <%= @recommendation.movie.score %></b> - 
-      <%= @recommendation.movie.rt_datum.critics_consensus %>    
+      <b>Critics Consensus</b>:
+      <%= @recommendation.movie.rt_datum.critics_consensus %> 
     </p>
+
+    <div id="trailer">
+      <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+  </div>
+
+  <div id="recommendation">
+    
+    <h3>you should see...</h3>
+    <h1><%= @recommendation.movie.title %></h1>
+    <div id="rating"><%= @recommendation.movie.score %></div>
+
+  </div>
+
+  <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_path( @recommendation.ranking + 1 ), :id => "next" %>
+
 </div>
-
-<hr>
-
-<%= form_for :theaters, url: movie_theaters_path(@id) do |f| %>
-
-  <%= f.text_field :zip, :placeholder => "zip code" %> <br>
-  <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
-  <%= f.submit 'Get Showtimes', class: 'btn' %>
-
-<% end %>
-
-<br><br>
-  
-<%= debug(params) if Rails.env.development? %>
-
-
-</center>

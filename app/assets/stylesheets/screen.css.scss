@@ -45,7 +45,7 @@ b{
   height:100%;
 }
 
-body{
+body2{
   background: $df;
   #container{
     position:absolute;
@@ -56,14 +56,15 @@ body{
     margin-top: -210px;
     margin-left:-160px;
     background:$gradient_bg_dark;
-    @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
     overflow:scroll;
     overflow-x:hidden;
+    @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
   }
 }
 #showtimes #container{
   width:320px;
   overflow:hidden;
+  @include box-shadow($black 0 0 40px);
 }
 
 header{
@@ -109,6 +110,8 @@ header{
 }
 
 #recommendation{
+  height:255px;
+  margin-bottom:30px;
   h1{
     font-size:64px;
     margin-bottom:25px;
@@ -136,7 +139,6 @@ header{
     margin:auto;
     @include border-radius(100%); 
   }
-  margin-bottom:30px;
 }
 
 #showtimes #recommendation{
