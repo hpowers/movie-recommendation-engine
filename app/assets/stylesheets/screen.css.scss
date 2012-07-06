@@ -64,6 +64,7 @@ body{
 #showtimes #container{
   width:320px;
   overflow:hidden;
+  @include box-shadow($black 0 0 40px);
 }
 
 header{
