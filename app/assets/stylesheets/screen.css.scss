@@ -123,14 +123,15 @@ header{
 }
 
 #recommendation{
-  height:255px;
+  height:295px;
   margin-bottom:30px;
   h1{
     font-size:64px;
     margin-bottom:25px;
+    display: inline;
   }  
   h3{
-    margin-top:40px;
+    padding-top:40px;
     font-size:24px;
     margin-bottom:5px;
   }
@@ -150,8 +151,14 @@ header{
     width: 28px;
     height: 28px;
     margin:auto;
+    margin-top:30px;
     @include border-radius(100%); 
+    cursor:pointer;
   }
+}
+
+.pointer{
+  cursor: pointer;
 }
 
 #showtimes #recommendation{
