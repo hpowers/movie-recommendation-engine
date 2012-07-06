@@ -93,6 +93,11 @@ module UpdateRottenTomato
         active_movie.released = true
       end
 
+      # find YouTube trailer
+      if !active_movie.videoid
+        active_movie.videoid = YouTube.search(active_movie.title)
+      end
+
       active_movie.save
       rotten.save
     end
@@ -305,6 +310,32 @@ module UpdateImdb
 
       imdb_datum.save
     end
+  end
+end
+
+# This module finds trailers for movies on YouTube.
+# The search method takes a tile and returns a YoutTube videoid for the trailer
+
+module YouTube
+
+  def self.search(title)
+    
+      url = "http://gdata.youtube.com/feeds/api/videos?"+
+            "q=#{title}+trailer&max-results=10&v=2&alt=json"
+
+      url      = URI.escape(url)
+
+      response = JSON.parse( Net::HTTP.get_response( URI( url ) ).body )
+
+      response["feed"]["entry"].each do |movie|
+
+        # if movie["title"]["$t"].include?(title)
+          return movie["media$group"]["yt$videoid"]["$t"] 
+        # end
+      end
+
+      return nil
+
   end
 end
 
@@ -562,8 +593,7 @@ namespace :db do
       # grab a timestamp to delete old movies with
       start_time = Time.now - 5
 
-      # update the movie list, rotten tomato data, and removes old movies
-      # from the default list
+      # update the movie list, trailers, and rotten tomato data
       UpdateRottenTomato.in_theaters
         decnt.go('tomato theaters')
       UpdateRottenTomato.opening
