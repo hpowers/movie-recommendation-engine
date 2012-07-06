@@ -45,7 +45,9 @@ b{
   height:100%;
 }
 
-body2{
+#debug{ display:none }
+
+body{
   background: $df;
   #container{
     position:absolute;
@@ -60,12 +62,23 @@ body2{
     overflow-x:hidden;
     @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
   }
+  #debug{
+    display:inline;
+    width:100%;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:20px;
+    line-height: 23px;
+    margin-bottom:20px;
+    position:absolute;
+    bottom:5px;
+  }
 }
 #showtimes #container{
   width:320px;
   overflow:hidden;
   @include box-shadow($black 0 0 40px);
 }
+
 
 header{
   a{
