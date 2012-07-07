@@ -2,7 +2,8 @@
   <header>
 
     <a href="#" id="info">&nbsp;&nbsp;i&nbsp;&nbsp;</a>
-    <a href="#" id="showtimes" >SHOWTIMES</a>
+    <span><%= @recommendation.movie.score %></span>
+    <a href="#" id="showtimes" ><%= @recommendation.zip_code %></a>
 
   </header>
 
@@ -25,15 +26,61 @@
       
       <h3>you should see...</h3>
       <h1><%= @recommendation.movie.title %></h1>
-      <div id="rating"><%= @recommendation.movie.score %></div>
 
     </div>
 
     <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next" %>
 
+    <div id="theaters">
+      <ul>
+
+        <% @recommendation.showtime_information.each do |theater_hash| %>
+        <div class="listing">
+
+          <li class="theater">
+            <%= theater_hash[:theater][:name] %>
+            <span><%= theater_hash[:theater][:address] %></span>
+          </li>
+
+          <ul class="times">
+
+          <% theater_hash[:showtimes].each do |time, url| %>
+
+            <% if url.empty? %>
+
+              <li>
+                <%= time %>
+              </li>
+
+            <% else %>
+
+                <li>
+                  <a href="<%=url%>"> <%= time %> </a>
+                </li>
+
+            <% end %>
+
+          <% end %>
+        </div>
+        <% end %>
+
+      </ul>
+
+    </div>
+
+    <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form'} do |f| %>
+
+      <%= f.text_field :zip, :placeholder => "@recommendation.zip_code" %><br>
+      <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
+      <%= f.submit 'Update Showtimes', class: 'btn' %>
+
+    <% end %>    
   </div>
 </div> <!--! end of #container -->
 
 <div id="debug">
   <%= debug(params) if Rails.env.development? %>  
 </div>
+
+
+

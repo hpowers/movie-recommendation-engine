@@ -9,7 +9,9 @@ $(document).ready(function() {
   });
   $('#showtimes').click(function(event) {
     // Act on the event
-    var count = prompt("Enter Your Zips Code");
+    var zipcode = prompt("Enter Your Zips Code");
+    $('#theaters_zip').val(zipcode);
+    $('.zip_form').submit();
     return false;
   });
 
@@ -21,7 +23,6 @@ $(document).ready(function() {
   });
 
   fitTitle();
-
 
 });
 

@@ -63,7 +63,7 @@ body{
     @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
   }
   #debug{
-    display:inline;
+    // display:inline;
     width:100%;
     font-family:Arial, Helvetica, sans-serif;
     font-size:20px;
@@ -73,7 +73,7 @@ body{
     bottom:5px;
   }
 }
-#showtimes #container{
+.theaters-show #container{
   width:320px;
   overflow:hidden;
   @include box-shadow($black 0 0 40px);
@@ -102,7 +102,7 @@ header{
   }
 }
 
-#showtimes header{
+.theaters-show header{
   span{
     color: adjust-lightness(#000,20);
     padding: 0 5px;
@@ -161,7 +161,7 @@ header{
   cursor: pointer;
 }
 
-#showtimes #recommendation{
+.theaters-show #recommendation{
   height:auto;
   h1{
     margin-bottom:20px;
@@ -182,7 +182,7 @@ header{
   font-size:20px;
 }
 
-#showtimes #next{
+.theaters-show #next{
   width:180px;
   background: adjust-lightness($dark_gray,20);
   font-size:16px;
@@ -203,7 +203,7 @@ header{
     margin-bottom:9px;
     @include box-shadow(adjust-lightness($dark_gray,20) 0 0 5px);
     &:last-child{
-      display:none;
+      // display:none;
     }
   }
 
@@ -230,6 +230,9 @@ header{
     }
   }
 }
+
+// this should hide w/ media query
+.zip_form{ display:none }
 
 footer{
   position: absolute;

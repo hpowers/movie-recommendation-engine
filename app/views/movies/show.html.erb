@@ -31,6 +31,14 @@
 
     <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_path( @recommendation.ranking + 1 ), :id => "next" %>
 
+    <%= form_for :theaters, url: movie_theaters_path(@id), :html => {:class => 'zip_form'} do |f| %>
+
+      <%= f.text_field :zip, :placeholder => "zip code" %><br>
+      <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
+      <%= f.submit 'Get Showtimes', class: 'btn' %>
+
+    <% end %>
+
   </div>
 </div> <!--! end of #container -->
 

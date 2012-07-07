@@ -3,6 +3,7 @@ require 'recommendations'
 class TheatersController < ApplicationController
 
   def show
+    # cookies.delete(:zip_code)
     @recommendation = Recommendations.new( params[:movie_id], params[:id] )
   end
 
