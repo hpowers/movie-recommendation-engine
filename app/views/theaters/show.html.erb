@@ -1,91 +1,39 @@
-<center>
+<div id="container">
+  <header>
 
-<br><br>
+    <a href="#" id="info">&nbsp;&nbsp;i&nbsp;&nbsp;</a>
+    <a href="#" id="showtimes" >SHOWTIMES</a>
 
-<h3>you should see ...</h3>
-<h1><%= @recommendation.movie.title %></h1>
+  </header>
 
-<br><br>
+  <div id="main" role="main">
 
-<%= link_to "Next →", movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :class => "btn btn-primary" %>
-
-<hr>
-
-<h4>Showtimes for <%= @recommendation.zip_code %></h4>
-<br>
-
-<%#= @recommendation.theaters.inspect %>
-<%#= @theater_data.inspect %>
-
-<div class="container">
-  
-  <div id="showtimes">
-    
-    <ul>
-
-      <% @recommendation.showtime_information.each do |theater_hash| %>
-
-        <li>
-          <b> <%= theater_hash[:theater][:name]    %> </b> - 
-              <%= theater_hash[:theater][:address] %>
-        </li>
-
-        <ul class="times">
-
-        <% theater_hash[:showtimes].each do |time, url| %>
-
-          <% if url.empty? %>
-
-            <li>
-              <%= time %>
-            </li>
-
-          <% else %>
-
-              <li>
-                <a href="<%=url%>"> <%= time %> </a>
-              </li>
-
-          <% end %>
-
-        <% end %>
-
-      </ul>
-
-      <% end %>
-
-      <% if @recommendation.showtime_information.empty? %>
-
-        <li>Sorry, this movie is not playing in your area.</li>
+    <div id="info_box">
       
-      <% end %>
+      <p>
+        <b>Critics Consensus</b>:
+        <%= @recommendation.movie.rt_datum.critics_consensus %> 
+      </p>
 
-    </ul>
+      <div id="trailer">
+        <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+    </div>
+
+    <div id="recommendation">
+      
+      <h3>you should see...</h3>
+      <h1><%= @recommendation.movie.title %></h1>
+      <div id="rating"><%= @recommendation.movie.score %></div>
+
+    </div>
+
+    <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next" %>
 
   </div>
+</div> <!--! end of #container -->
 
-  <p>
-    <b>SCORED <%= @recommendation.movie.score %></b> - 
-    <%= @recommendation.movie.rt_datum.critics_consensus %>    
-  </p>
-
+<div id="debug">
+  <%= debug(params) if Rails.env.development? %>  
 </div>
-
-<hr>
-
-<br><br><br><br>
-
-<%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id) do |f| %>
-
-  <%= f.text_field :zip , value: @recommendation.zip_code %> <br>
-  <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
-  <%= f.submit 'Update Showtimes' %>
-
-<% end %>
-
-<br><br>
-  
-<%= debug(params) if Rails.env.development? %>
-
-
-</center>
