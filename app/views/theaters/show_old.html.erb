@@ -20,8 +20,48 @@
 <div class="container">
   
   <div id="showtimes" data-movie_id="<%= params[:movie_id] %>" data-id="<%= params[:id] %>">
-    <h2>loading ...</h2>
-    <br>
+    
+    <ul>
+
+      <% @recommendation.showtime_information.each do |theater_hash| %>
+
+        <li>
+          <b> <%= theater_hash[:theater][:name]    %> </b> - 
+              <%= theater_hash[:theater][:address] %>
+        </li>
+
+        <ul class="times">
+
+        <% theater_hash[:showtimes].each do |time, url| %>
+
+          <% if url.empty? %>
+
+            <li>
+              <%= time %>
+            </li>
+
+          <% else %>
+
+              <li>
+                <a href="<%=url%>"> <%= time %> </a>
+              </li>
+
+          <% end %>
+
+        <% end %>
+
+      </ul>
+
+      <% end %>
+
+      <% if @recommendation.showtime_information.empty? %>
+
+        <li>Sorry, this movie is not playing in your area.</li>
+      
+      <% end %>
+
+    </ul>
+
   </div>
 
   <p>

@@ -4,6 +4,12 @@ class TheatersController < ApplicationController
 
   def show
     @recommendation = Recommendations.new( params[:movie_id], params[:id] )
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @recommendation.showtime_information }
+    end
+
   end
 
   def create
@@ -26,6 +32,14 @@ class TheatersController < ApplicationController
 
     cookies.delete(:zip_code)
     redirect_to movie_path( params[:theaters][:movie_id] )
+
+  end
+
+  def json
+
+    
+
+    render json: @theaters
 
   end
 end

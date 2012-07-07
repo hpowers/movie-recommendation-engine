@@ -35,6 +35,7 @@ describe "Default page" do
       page.driver.browser.set_cookie "zip_code=#{zip_code}"
 
       Fandango.stub(:movies_near) { [@top_movie.title] }
+
       Recommendations.any_instance.stub(:showtime_information) { [] }
 
       visit root_path
