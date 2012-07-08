@@ -31,42 +31,35 @@
 
     <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next" %>
 
-    <div id="theaters">
-      <ul>
+    <script id="showtimes-template" type="text/x-handlebars-template">
+    
+    <ul>
+        {{#theaters}}
+        
+        <li>{{information.name}}</li>
 
-        <% @recommendation.showtime_information.each do |theater_hash| %>
-        <div class="listing">
+        <ul class="times">
+          {{#showtimes}}
+          
+          {{#if url}}
 
-          <li class="theater">
-            <%= theater_hash[:theater][:name] %>
-            <span><%= theater_hash[:theater][:address] %></span>
-          </li>
+            <li><a href="{{url}}">{{time}}</a></li>
 
-          <ul class="times">
+          {{else}}
 
-          <% theater_hash[:showtimes].each do |time, url| %>
+            <li>{{time}}</li>
 
-            <% if url.empty? %>
+          {{/if}}
 
-              <li>
-                <%= time %>
-              </li>
+          {{/showtimes}}
+        </ul>
+        
+        {{/theaters}}
+    </ul>
 
-            <% else %>
+    </script>
 
-                <li>
-                  <a href="<%=url%>"> <%= time %> </a>
-                </li>
-
-            <% end %>
-
-          <% end %>
-        </div>
-        <% end %>
-
-      </ul>
-
-    </div>
+    <div id="theaters">loading showtimes...</div>
 
     <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form'} do |f| %>
 

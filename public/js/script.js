@@ -9,7 +9,7 @@ $(document).ready(function() {
   });
   $('#showtimes').click(function(event) {
     // Act on the event
-    var zipcode = prompt("Enter Your Zips Code");
+    var zipcode = prompt("Enter Your Zip Code");
     $('#theaters_zip').val(zipcode);
     $('.zip_form').submit();
     return false;
