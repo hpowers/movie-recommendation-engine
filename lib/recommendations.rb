@@ -97,7 +97,80 @@ class Recommendations
     # end
     
     # informatation_array
-    [{:theater=>{:name=>"Regal Gallery Place Stadium 14", :id=>"aatar", :address=>"701 Seventh Street NW Washington, DC 20001", :postal_code=>"20001"}, :showtimes=>[["12:30a", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963158&mid=147736&refreshdate=7/8/2012&tid=AATAR"], ["11:20a", ""], ["1:55p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"], ["4:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963122&mid=147736&tid=AATAR"], ["7:20p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963135&mid=147736&tid=AATAR"], ["10:00p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963147&mid=147736&tid=AATAR"]]}, {:theater=>{:name=>"AMC Loews Georgetown 14", :id=>"aaqpv", :address=>"3111 K Street N.W. Washington, DC 20007", :postal_code=>"20007"}, :showtimes=>[["10:45a", ""], ["1:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839552244&mid=147736&tid=AAQPV"], ["4:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839552257&mid=147736&tid=AAQPV"], ["7:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839552272&mid=147736&tid=AAQPV"], ["10:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839552285&mid=147736&tid=AAQPV"]]}] 
+
+    informatation_array = [{:theater=>{:name=>"Regal Gallery Place Stadium 14", :id=>"aatar", :address=>"701 Seventh Street NW Washington, DC 20001", :postal_code=>"20001"}, :showtimes=>[["12:30a", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963158&mid=147736&refreshdate=7/8/2012&tid=AATAR"], ["11:20a", ""], ["1:55p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"], ["4:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963122&mid=147736&tid=AATAR"], ["7:20p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963135&mid=147736&tid=AATAR"], ["10:00p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963147&mid=147736&tid=AATAR"]]}, {:theater=>{:name=>"AMC Loews Georgetown 14", :id=>"aaqpv", :address=>"3111 K Street N.W. Washington, DC 20007", :postal_code=>"20007"}, :showtimes=>[["10:45a", ""], ["1:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839552244&mid=147736&tid=AAQPV"], ["4:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839552257&mid=147736&tid=AAQPV"], ["7:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839552272&mid=147736&tid=AAQPV"], ["10:30p", "https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839552285&mid=147736&tid=AAQPV"]]}] 
+
+#     informatation_array = [
+#   {
+#     :information=>
+#       {
+#         :name=>"Regal Gallery Place Stadium 14", 
+#         :id=>"aatar", 
+#         :address=>"701 Seventh Street NW Washington, DC 20001", 
+#         :postal_code=>"20001"
+#       }, 
+#     :showtimes=>
+#       [
+#         {
+#           :time=>"12:30a",
+#           :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#         },
+#         {
+#           :time=>"11:20a",
+#           :url=>""
+#         },
+#         {
+#           :time=>"1:55p",
+#           :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#         },
+#         {
+#           :time=>"4:30p",
+#           :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#         },
+#         {
+#           :time=>"7:20p",
+#           :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#         },
+#         {
+#           :time=>"10:00p",
+#           :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#         }
+#       ]
+#   }, 
+#   {
+#     :information=>
+#       {
+#         :name=>"AMC Loews Georgetown 14",
+#         :id=>"aaqpv",
+#         :address=>"3111 K Street N.W. Washington, DC 20007",
+#         :postal_code=>"20007"},
+#         :showtimes=>
+#           [
+#             {
+#               :time=>"10:45a",
+#               :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#             },
+#             {
+#               :time=>"1:30p",
+#               :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#             },
+#             {
+#               :time=>"4:30p",
+#               :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#             },
+#             {
+#               :time=>"7:30p",
+#               :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#             },
+#             {
+#               :time=>"10:30p",
+#               :url=>"https://www.fandango.com/Transaction/Ticketing/ticketboxoffice.aspx?row_count=2839963109&mid=147736&tid=AATAR"
+#             }
+#           ]
+#       }
+# ] 
+
+#       { theaters: informatation_array }
   end
 
   def theaters(limit=2)

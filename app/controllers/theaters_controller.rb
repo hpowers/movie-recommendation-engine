@@ -3,8 +3,12 @@ require 'recommendations'
 class TheatersController < ApplicationController
 
   def show
-    # cookies.delete(:zip_code)
     @recommendation = Recommendations.new( params[:movie_id], params[:id] )
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @recommendation.showtime_information }
+    end
   end
 
   def create
