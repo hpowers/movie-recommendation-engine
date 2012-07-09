@@ -1,51 +1,85 @@
-<center>
+<div id="container">
+  <header>
 
-<br><br>
+    <a href="#" id="info">&nbsp;&nbsp;i&nbsp;&nbsp;</a>
+    <span><%= @recommendation.movie.score %></span>
+    <a href="#" id="showtimes" ><%= @recommendation.zip_code %></a>
 
-<h3>you should see ...</h3>
-<h1><%= @recommendation.movie.title %></h1>
+  </header>
 
-<br><br>
+  <div id="main" role="main">
 
-<%= link_to "Next →", movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :class => "btn btn-primary" %>
+    <div id="info_box">
+      
+      <p>
+        <b>Critics Consensus</b>:
+        <%= @recommendation.movie.rt_datum.critics_consensus %> 
+      </p>
 
-<hr>
+      <div id="trailer">
+        <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+      </div>
 
-<h4>Showtimes for <%= @recommendation.zip_code %></h4>
-<br>
+    </div>
 
-<%#= @recommendation.theaters.inspect %>
-<%#= @theater_data.inspect %>
+    <div id="recommendation">
+      
+      <h3>you should see...</h3>
+      <h1><%= @recommendation.movie.title %></h1>
 
-<div class="container">
-  
-  <div id="showtimes" data-movie_id="<%= params[:movie_id] %>" data-id="<%= params[:id] %>">
-    <h2>loading ...</h2>
-    <br>
+    </div>
+
+    <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next" %>
+
+    <script id="showtimes-template" type="text/x-handlebars-template">
+    
+    <ul>
+        {{#theaters}}
+
+        <div class="listing">
+
+          <li class="theater">{{information.name}}</li>
+
+          <ul class="times">
+            {{#showtimes}}
+            
+            {{#if url}}
+
+              <li><a href="{{url}}">{{time}}</a></li>
+
+            {{else}}
+
+              <li>{{time}}</li>
+
+            {{/if}}
+
+            {{/showtimes}}
+
+          </ul>
+
+        </div>
+
+        {{/theaters}}
+    </ul>
+
+    </script>
+
+    <div id="theaters" data-id="<%= params[:id] %>">loading showtimes...</div>
+
+    <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form'} do |f| %>
+
+      <%= f.text_field :zip, :placeholder => "@recommendation.zip_code" %><br>
+      <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
+      <%= f.submit 'Update Showtimes', class: 'btn' %>
+
+    <% end %>    
+
   </div>
+</div> <!--! end of #container -->
 
-  <p>
-    <b>SCORED <%= @recommendation.movie.score %></b> - 
-    <%= @recommendation.movie.rt_datum.critics_consensus %>    
-  </p>
-
+<div id="debug">
+  <%= debug(params) if Rails.env.development? %>  
 </div>
 
-<hr>
-
-<br><br><br><br>
-
-<%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id) do |f| %>
-
-  <%= f.text_field :zip , value: @recommendation.zip_code %> <br>
-  <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
-  <%= f.submit 'Update Showtimes' %>
-
-<% end %>
-
-<br><br>
-  
-<%= debug(params) if Rails.env.development? %>
 
 
-</center>

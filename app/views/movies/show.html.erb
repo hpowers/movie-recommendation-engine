@@ -1,39 +1,47 @@
-<center>
+<div id="container">
+  <header>
 
-<iframe width="853" height="480" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+    <a href="#" id="info">&nbsp;&nbsp;i&nbsp;&nbsp;</a>
+    <a href="#" id="showtimes" >SHOWTIMES</a>
 
-<br><br>
+  </header>
 
-<%#= render @movie %>
-<h3>you should see ...</h3>
-<h1><%= @recommendation.movie.title %></h1>
+  <div id="main" role="main">
 
-<br><br>
+    <div id="info_box">
+      
+      <p>
+        <b>Critics Consensus</b>:
+        <%= @recommendation.movie.rt_datum.critics_consensus %> 
+      </p>
 
-<%= link_to 'Next →', movie_path( @recommendation.ranking + 1 ), :class => "btn btn-primary" %>
+      <div id="trailer">
+        <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+      </div>
 
-<hr>
+    </div>
 
-<div class="container">
-    <p>
-      <b>SCORED <%= @recommendation.movie.score %></b> - 
-      <%= @recommendation.movie.rt_datum.critics_consensus %>    
-    </p>
+    <div id="recommendation">
+      
+      <h3>you should see...</h3>
+      <h1><%= @recommendation.movie.title %></h1>
+      <div id="rating"><%= @recommendation.movie.score %></div>
+
+    </div>
+
+    <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_path( @recommendation.ranking + 1 ), :id => "next" %>
+
+    <%= form_for :theaters, url: movie_theaters_path(@id), :html => {:class => 'zip_form'} do |f| %>
+
+      <%= f.text_field :zip, :placeholder => "zip code" %><br>
+      <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
+      <%= f.submit 'Get Showtimes', class: 'btn' %>
+
+    <% end %>
+
+  </div>
+</div> <!--! end of #container -->
+
+<div id="debug">
+  <%= debug(params) if Rails.env.development? %>  
 </div>
-
-<hr>
-
-<%= form_for :theaters, url: movie_theaters_path(@id) do |f| %>
-
-  <%= f.text_field :zip, :placeholder => "zip code" %> <br>
-  <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
-  <%= f.submit 'Get Showtimes', class: 'btn' %>
-
-<% end %>
-
-<br><br>
-  
-<%= debug(params) if Rails.env.development? %>
-
-
-</center>

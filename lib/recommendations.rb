@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Builds recommendations based on movies playing in a specified zip code
 
 class Recommendations
@@ -64,39 +65,59 @@ class Recommendations
       movie.at_css('h4 a').text.include?(title)
     end
 
-    showtimes_hash = {}
+    # showtimes_array = {}
+    showtimes_array = []
+
     matching_title.each do |showtimes|
 
       # find showtimes for past shows and non ticketable shows
       showtimes.css('.times li.past','.times li.timeNonWired').each do |time|
-        showtimes_hash[time.text]=''
+        # showtimes_array[time.text]=''
+        showtime_time = time.text
+        showtime_url = ''
+        showtimes_array << { time: showtime_time, url: showtime_url }
       end
 
       # find showtimes & url for ticketable shows
       showtimes.css('.times a.showtime_itr').each do |time|
-        showtimes_hash[time.at_css('.showtime_pop').text]=time[:href]
+        # showtimes_array[time.at_css('.showtime_pop').text]=time[:href]
+        showtime_time = time.at_css('.showtime_pop').text
+        showtime_url = time[:href]
+        showtimes_array << { time: showtime_time, url: showtime_url }
       end
+
     end
 
+    # return showtimes_array
+
     # make sure showtimes are in chronological order
-    return showtimes_hash.sort_by do | time , url |
-      Time.parse(time.gsub(/a/,'am').gsub(/p/,'pm'))
+    return showtimes_array.sort_by do | showtime |
+
+      time = Time.parse(showtime[:time].gsub(/a/,'am').gsub(/p/,'pm'))
+
+      if time.hour < 4
+        time += 86400
+      end
+
+      time
+
     end
 
   end
 
   def showtime_information
-
+    # STUB out
     informatation_array = []
     
     theaters.each do |theater|
-      informatation_array << { theater: theater, showtimes: showtimes(theater) }
+      informatation_array << { information: theater, showtimes: showtimes(theater) }
     end
     
-    informatation_array
+
+      { theaters: informatation_array }
   end
 
-  def theaters(limit=3)
+  def theaters(limit=2)
 
     theater_data = @data
     theater_list = []

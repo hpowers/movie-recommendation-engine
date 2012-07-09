@@ -6,10 +6,10 @@ class TheatersController < ApplicationController
     @recommendation = Recommendations.new( params[:movie_id], params[:id] )
 
     respond_to do |format|
-      format.html # index.html.erb
+
+      format.html
       format.json { render json: @recommendation.showtime_information }
     end
-
   end
 
   def create
