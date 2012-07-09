@@ -35,31 +35,36 @@
     
     <ul>
         {{#theaters}}
-        
-        <li>{{information.name}}</li>
 
-        <ul class="times">
-          {{#showtimes}}
-          
-          {{#if url}}
+        <div class="listing">
 
-            <li><a href="{{url}}">{{time}}</a></li>
+          <li class="theater">{{information.name}}</li>
 
-          {{else}}
+          <ul class="times">
+            {{#showtimes}}
+            
+            {{#if url}}
 
-            <li>{{time}}</li>
+              <li><a href="{{url}}">{{time}}</a></li>
 
-          {{/if}}
+            {{else}}
 
-          {{/showtimes}}
-        </ul>
-        
+              <li>{{time}}</li>
+
+            {{/if}}
+
+            {{/showtimes}}
+
+          </ul>
+
+        </div>
+
         {{/theaters}}
     </ul>
 
     </script>
 
-    <div id="theaters">loading showtimes...</div>
+    <div id="theaters" data-id="<%= params[:id] %>">loading showtimes...</div>
 
     <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form'} do |f| %>
 

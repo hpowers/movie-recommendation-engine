@@ -88,12 +88,20 @@ class Recommendations
 
     end
 
-    return showtimes_array
+    # return showtimes_array
 
     # make sure showtimes are in chronological order
-    # return showtimes_array.sort_by do | time , url |
-    #   Time.parse(time.gsub(/a/,'am').gsub(/p/,'pm'))
-    # end
+    return showtimes_array.sort_by do | showtime |
+
+      time = Time.parse(showtime[:time].gsub(/a/,'am').gsub(/p/,'pm'))
+
+      if time.hour < 4
+        time += 86400
+      end
+
+      time
+
+    end
 
   end
 
