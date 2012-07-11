@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require_tree .
 //= require handlebars-1.0.0.beta.6.js
+//= require dataTables/jquery.dataTables

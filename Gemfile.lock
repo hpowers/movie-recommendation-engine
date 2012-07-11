@@ -4,6 +4,13 @@ GIT
   specs:
     hirb (0.7.0)
 
+GIT
+  remote: git://github.com/rweng/jquery-datatables-rails.git
+  revision: 535d355c85d3a79984cfe310b22aeb9ca05252e6
+  specs:
+    jquery-datatables-rails (1.10.0)
+      jquery-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -200,6 +207,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork (= 0.3.2)
   hirb!
+  jquery-datatables-rails!
   jquery-rails
   json
   launchy

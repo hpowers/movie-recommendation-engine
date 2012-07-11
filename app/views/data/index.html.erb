@@ -1,0 +1,24 @@
+<table id="movie_data">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Default</th>
+    <th>Score</th>
+    <th>Released</th>
+    <th>VideoID</th>
+  </tr>
+</thead>
+<tbody>
+  <% @movies.each do |movie| %>
+  <tr>
+    <td><%= movie.id %></td>
+    <td><%= movie.title %></td>
+    <td><%= movie.default %></td>
+    <td><%= movie.score %></td>
+    <td><%= movie.released %></td>
+    <td><%= movie.videoid %></td>
+  </tr>
+  <% end %>
+</tbody>
+</table>
