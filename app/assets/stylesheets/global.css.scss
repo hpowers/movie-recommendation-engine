@@ -1,15 +1,4 @@
-@import "base";
-
-$gradient_bg_light: #fafafa;
-$gradient_bg_dark: #b8b8b8;
-
-$dark_gray: #9d9d9d;
-
-$black: #222;
-$white: #e4e7e7;
-$true_black: #000;
-
-$df: #4A525A;
+@import "_base";
 
 html{
   height:100%;
@@ -47,7 +36,7 @@ b{
 
 #debug{ display:none }
 
-body{
+body2{
   background: $df;
   #container{
     position:absolute;
@@ -80,7 +69,7 @@ body{
 }
 
 body.data-index{
-  background: #fff;
+  background: $true_white;
   table{
     padding:10px 0;
   }
@@ -100,35 +89,64 @@ body.data-index{
   padding-top:20px;
 }
 
-header{
-  a{
-    color:$white;
-    &:hover{
+// elements to hide from non-mobile
+header,#next { display:none }
+
+@media only screen and ( max-width: 490px ){
+
+  header{
+    display:block;
+    a{
       color:$white;
+      &:hover{
+        color:$white;
+      }
+      &:visited{
+        color:$white;
+      }
     }
-    &:visited{
-      color:$white;
+    background:$true_black;
+    
+    @include clearfix;
+    padding:10px;
+    #info{
+      float:left;
+    }
+    #showtimes{
+      float:right;
     }
   }
-  background:$true_black;
-  
-  @include clearfix;
-  padding:10px;
-  #info{
-    float:left;
+
+  .theaters-show header{
+    span{
+      color: adjust-lightness(#000,20);
+      padding: 0 5px;
+      margin-left:10px;
+    }
   }
-  #showtimes{
-    float:right;
+
+  #next{
+    display:inline-block;
+    margin:auto;
+    width:180px;
+    background: adjust-lightness($dark_gray,10);
+    padding: 7px;
+    margin-bottom:20px;
+    font-size:20px;
   }
+
+  .theaters-show #next{
+    width:180px;
+    background: adjust-lightness($dark_gray,20);
+    font-size:16px;
+    margin:auto;
+    padding:5px;
+    margin-bottom:20px;
+  }
+
 }
 
-.theaters-show header{
-  span{
-    color: adjust-lightness(#000,20);
-    padding: 0 5px;
-    margin-left:10px;
-  }
-}
+
 
 #info_box{
   font-size: 12px;
@@ -193,23 +211,7 @@ header{
   span{ display:none; }
 }
 
-#next{
-  margin:auto;
-  width:180px;
-  background: adjust-lightness($dark_gray,10);
-  padding: 7px;
-  margin-bottom:20px;
-  font-size:20px;
-}
 
-.theaters-show #next{
-  width:180px;
-  background: adjust-lightness($dark_gray,20);
-  font-size:16px;
-  margin:auto;
-  padding:5px;
-  margin-bottom:20px;
-}
 
 #theaters{
 
