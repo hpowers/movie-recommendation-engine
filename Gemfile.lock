@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/cldwalker/hirb.git
+  revision: b12a53b7a79d9c1ce650be7c2cc0a2dc639e5dd8
+  specs:
+    hirb (0.7.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -193,6 +199,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   guard-spork (= 0.3.2)
+  hirb!
   jquery-rails
   json
   launchy

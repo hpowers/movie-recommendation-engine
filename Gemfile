@@ -29,6 +29,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
 
+  # Hirb.enable
+  gem 'hirb', :git => "git://github.com/cldwalker/hirb.git"
+
   # Live Reload
   gem 'rb-fsevent'
   gem 'guard-livereload'
