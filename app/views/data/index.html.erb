@@ -1,24 +1,61 @@
-<table id="movie_data">
-<thead>
-  <tr>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Default</th>
-    <th>Score</th>
-    <th>Released</th>
-    <th>VideoID</th>
-  </tr>
-</thead>
-<tbody>
-  <% @movies.each do |movie| %>
-  <tr>
-    <td><%= movie.id %></td>
-    <td><%= movie.title %></td>
-    <td><%= movie.default %></td>
-    <td><%= movie.score %></td>
-    <td><%= movie.released %></td>
-    <td><%= movie.videoid %></td>
-  </tr>
-  <% end %>
-</tbody>
-</table>
+<div id="movie_data_container">
+  <table id="movie_data">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Score</th>
+      <th>Rotten</th>
+      <th>Meta</th>
+      <th>audience</th>
+      <th>Ebert</th>
+      <th>iMeter</th>
+      <th>Price</th>
+      <th>Gross</th>
+      <th>Theaters</th>
+      <th>Budget</th>
+      <th>date</th>
+      <th>runtime</th>
+      <th>rating</th>
+      <th>consensus</th>
+      <th>YouTube</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+    <tr>
+      <td><%= movie.id %></td>
+      <td>
+        <a href="http://www.imdb.com/title/<%= movie.imdb_datum.url %>/" target="_blank">
+          <%= truncate(movie.title) %>
+        </a>
+      </td>
+      <td><%= movie.score %></td>
+      <td><%= movie.rt_datum.critics_score %></td>
+      <td><%= movie.imdb_datum.metacritic %></td>
+      <td><%= movie.rt_datum.audience_score %></td>  
+      <td><%= movie.ebert_datum.stars %></td>
+      <td><%= movie.imdb_datum.movie_meter %></td>
+      <td>
+            <a href="http://www.hsx.com/security/view/<%= movie.hsx_datum.url %>" target="_blank">
+              <%= number_to_currency(movie.hsx_datum.price, :precision => 0) %>  
+            </a>
+      </td>
+      <td><%= number_to_currency(movie.hsx_datum.gross, :precision => 0) %></td>
+      <td><%= number_with_delimiter(movie.hsx_datum.theaters) %></td>
+      <td><%= number_to_currency(movie.imdb_datum.budget, :precision => 0) %></td>
+      <td><%= movie.rt_datum.release_date %></td>
+      <td><%= movie.rt_datum.runtime %></td>
+      <td><%= movie.rt_datum.mpaa_rating %></td>
+      <td><%= truncate(movie.rt_datum.critics_consensus, :length => 17) %></td>
+      <td>
+            <a href="http://www.youtube.com/watch?v=<%= movie.videoid %>" target="_blank">
+              <%= movie.videoid %>
+            </a>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+  </table>
+</div>

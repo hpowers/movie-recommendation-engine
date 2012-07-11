@@ -79,6 +79,26 @@ body{
   @include box-shadow($black 0 0 40px);
 }
 
+body.data-index{
+  background: #fff;
+  table{
+    padding:10px 0;
+  }
+  a{
+    text-decoration:underline;
+  }
+  .dataTables_filter{
+    margin-bottom:10px;
+  }
+  .dataTables_info,.dataTables_paginate{
+    margin-top:10px;
+  }
+}
+#movie_data_container{
+  width:98%;
+  margin:auto;
+  padding-top:20px;
+}
 
 header{
   a{

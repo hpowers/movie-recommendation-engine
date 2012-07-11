@@ -1,7 +1,7 @@
 class DataController < ApplicationController
 
   def index
-    @movies = Movie.all
+    @movies = Movie.released
   end
 
 end
