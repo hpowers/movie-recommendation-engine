@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120703135356) do
+ActiveRecord::Schema.define(:version => 20120711194823) do
 
   create_table "ebert_data", :force => true do |t|
     t.float    "stars",      :default => 0.0
@@ -49,13 +49,14 @@ ActiveRecord::Schema.define(:version => 20120703135356) do
   add_index "imdb_data", ["movie_id"], :name => "index_imdb_data_on_movie_id"
 
   create_table "movies", :force => true do |t|
-    t.string   "title",                         :null => false
-    t.boolean  "default",    :default => false
-    t.integer  "score",      :default => 0
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "released",   :default => false
+    t.string   "title",                               :null => false
+    t.boolean  "default",          :default => false
+    t.integer  "score",            :default => 0
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "released",         :default => false
     t.string   "videoid"
+    t.integer  "score_adjustment", :default => 0,     :null => false
   end
 
   add_index "movies", ["default"], :name => "index_movies_on_default"
@@ -91,5 +92,17 @@ ActiveRecord::Schema.define(:version => 20120703135356) do
   end
 
   add_index "tweet_data", ["movie_id"], :name => "index_tweet_data_on_movie_id"
+
+  create_table "will_filter_filters", :force => true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.text     "data"
+    t.integer  "user_id"
+    t.string   "model_class_name"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "will_filter_filters", ["user_id"], :name => "index_will_filter_filters_on_user_id"
 
 end

@@ -18,4 +18,15 @@ class MoviesController < ApplicationController
     @recommendation = Recommendations.new( params[:id] )
 
   end
+
+  def update
+    id = params[:id]
+
+    movie = Movie.find(id)
+    
+    movie.score_adjustment = params[:update][:score_adjustment].to_i
+
+    movie.save
+  end
+
 end

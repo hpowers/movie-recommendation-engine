@@ -36,7 +36,22 @@ namespace :db do
       end
 
       # no negative scores
-      movie.score = movie.score.abs
+      movie.score = 0 if movie.score < 1
+
+      if movie.title == "Brave"
+        puts "Brave detected"
+        puts movie.score
+        puts movie.score_adjustment
+      end
+
+      # # multiple by adjustment
+      movie.score *= movie.score_adjustment / 100.0 + 1
+
+      if movie.title == "Brave"
+        puts "Brave detected"
+        puts movie.score
+        puts movie.score_adjustment
+      end
 
       movie.save
 

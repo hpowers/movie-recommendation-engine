@@ -4,3 +4,6 @@
 
 jQuery ->
         $('#movie_data').dataTable()
+
+        $(".score_adjustment").click (event) ->
+          score_adjustment = prompt("Score Adjustment")
