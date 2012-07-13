@@ -30,7 +30,7 @@
 
     <div id="recommendation">
       
-      <h3>you should see...</h3>
+      <h3>you should see ...</h3>
       <h1>
         <%= @recommendation.movie.title %><%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_path( @recommendation.ranking + 1 ), :id => "next2" %>
       </h1>
@@ -40,11 +40,5 @@
 
     <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_path( @recommendation.ranking + 1 ), :id => "next" %>
 
-
-
   </div>
 </div> <!--! end of #container -->
-
-<div id="debug">
-  <%= debug(params) if Rails.env.development? %>  
-</div>

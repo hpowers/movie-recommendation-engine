@@ -50,12 +50,63 @@ $(document).ready(function() {
       breakpoint: 'desktop',
       enter: function() {
         title();
+
         $(window).resize(function() {
           title();
         });
+
+        $('.arrow').hover(function() {
+          status('I don\'t want to see ...');
+        }, function() {
+          status();
+        });
+
+        $('.zip_form').hover(function() {
+          status('get showtimes for ...');
+          $('.zip_form input').addClass('hover');
+        }, function() {
+          $('.zip_form input').removeClass('hover');
+          status();
+        });
+
+        $('.zip_form').click(function(event) {
+          $('.zip_form').unbind("hover");
+          $('#theaters_zip').attr('placeholder', 'ZIP?')
+          status('enter your zip code to get showtimes for ...');
+        });
+
+        var zip_form = $('input#theaters_zip');
+        var zip_starting_val = zip_form.val();
+
+        zip_form.bind('keyup blur change paste', function() {
+          if (zip_form.val().length==5 && zip_form.val()!=zip_starting_val) {
+            zip_form.attr("readonly","readonly");
+            $(this).css('color','#616161');
+            $(this).css('outline','none');
+            $('.zip_form').submit();
+          }
+        });
+
+        $('#info').hover(function() {
+          status('get more information about ...');
+        }, function() {
+          status();
+        });
+
+        // $('#recommendation h1').hover(function() {
+        //   status('watch a trailer for ...');
+        // }, function() {
+        //   status();
+        // });
+
       },
       exit: function() {
         $(window).unbind("resize");
+        $('.arrow').unbind("hover");
+        $('.zip_form').unbind("hover");
+        $('.zip_form').unbind("click");
+        $('#info').unbind("hover");
+        // $('#recommendation h1').unbind("hover");
         $('#recommendation').css('margin-top', 'auto');
       }
   });
@@ -79,7 +130,11 @@ function mobileTitle(){
 function title(){
   var max_width = $(window).width() * .90;
   var title = $('#recommendation h1');
-  fixMargin();
+  // fixMargin();
+
+  // set default font size
+  var def_font_size = ($(window).height() - $('header').height()) / 6
+  title.css('font-size',def_font_size+'px');
 
   while (title.width() > max_width ||
         title.height() > parseInt(title.css('line-height'))*2)
@@ -88,9 +143,8 @@ function title(){
     if (current_size==90) {break;};
 
     $('#recommendation h1').css('font-size',(current_size-1)+'px');
-    // $('#recommendation h1').css('margin-left',(current_size-1)+'px');
-    fixMargin();
   }
+  fixMargin();
 }
 
 function fixMargin(){
@@ -98,5 +152,11 @@ function fixMargin(){
   margin = .9*margin
   if (margin < 1) { margin = 0};
   $('#recommendation').css('margin-top', margin+'px');
+}
+
+function status(message){
+  // default status message
+  message = message || 'you should see ...';
+  $('#recommendation h3').text(message);
 }
 

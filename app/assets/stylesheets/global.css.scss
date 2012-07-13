@@ -34,39 +34,39 @@ b{
   height:100%;
 }
 
-#debug{ display:none }
+// #debug{ display:none }
 
-body2{
-  background: $df;
-  #container{
-    position:absolute;
-    height:430px;
-    top:50%;
-    left:50%;
-    width:330px;
-    margin-top: -210px;
-    margin-left:-160px;
-    background:$gradient_bg_dark;
-    overflow:scroll;
-    overflow-x:hidden;
-    @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
-  }
-  #debug{
-    // display:inline;
-    width:100%;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:20px;
-    line-height: 23px;
-    margin-bottom:20px;
-    position:absolute;
-    bottom:5px;
-  }
-}
-.theaters-show #container{
-  width:320px;
-  overflow:hidden;
-  @include box-shadow($black 0 0 40px);
-}
+// body2{
+//   background: $df;
+//   #container{
+//     position:absolute;
+//     height:430px;
+//     top:50%;
+//     left:50%;
+//     width:330px;
+//     margin-top: -210px;
+//     margin-left:-160px;
+//     background:$gradient_bg_dark;
+//     overflow:scroll;
+//     overflow-x:hidden;
+//     @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
+//   }
+//   #debug{
+//     // display:inline;
+//     width:100%;
+//     font-family:Arial, Helvetica, sans-serif;
+//     font-size:20px;
+//     line-height: 23px;
+//     margin-bottom:20px;
+//     position:absolute;
+//     bottom:5px;
+//   }
+// }
+// .theaters-show2 #container{
+//   width:320px;
+//   overflow:hidden;
+//   @include box-shadow($black 0 0 40px);
+// }
 
 body.data-index{
   background: $true_white;
@@ -88,10 +88,6 @@ body.data-index{
   margin:auto;
   padding-top:20px;
 }
-
-
-
-
 
 #info_box{
   font-size: 12px;
@@ -115,8 +111,10 @@ body.data-index{
   }
   h3{
     padding-top:40px;
-    font-size:24px;
+    font-size:26px;
     margin-bottom:5px;
+    font-family:sans-serif;
+    font-weight:300;
   }
   .arrow{
     width:1em;
@@ -220,7 +218,7 @@ footer{
 @media only screen and ( min-width: 491px ){
 
   // elements to hide from non-mobile
-  #next,a#showtimes { display:none }
+  #next,a#showtimes,#rating { display:none }
 
   header{
     @include clearfix;
@@ -245,12 +243,14 @@ footer{
   }
 
   .zip_form{
+    cursor:pointer;
     float:right;
     margin-right: (80px/1440px*100)+0%; 
     width:142px;
     // height:34px;
     margin-top:3%;
     input{
+      cursor:pointer;
       font-size:20px;
       font-family:'Open Sans', sans-serif;
       width:142px;
@@ -276,12 +276,24 @@ footer{
         color: $white;
       }
     }
+    input.hover{
+      &.placeholder{ 
+        color:$white;
+      }
+      &:-moz-placeholder{ 
+        color:$white;
+      }
+      &::-webkit-input-placeholder{ 
+        color:$white;
+      }      
+    }
   }
 
   #recommendation h1{
     font-weight:700;
     text-transform:uppercase;
     letter-spacing:-5px;
+    cursor:pointer;
   }
 
 }
