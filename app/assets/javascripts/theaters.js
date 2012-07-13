@@ -10,6 +10,7 @@ $(document).ready(function() {
       // http://handlebarsjs.com/precompilation.html
       var template = Handlebars.compile(source);
       $("#theaters").html(template(data));
+      $("#theaters").append('<div id="more"><a href="#">FIND MORE THEATERS</a></div>');
     });
 
   };

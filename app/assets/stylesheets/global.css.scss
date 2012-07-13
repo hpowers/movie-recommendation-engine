@@ -221,7 +221,7 @@ footer{
 @media only screen and ( min-width: 491px ){
 
   // elements to hide from non-mobile
-  #next,a#showtimes,#rating,header span { display:none }
+  #next,a#showtimes,#rating,header span,#more { display:none }
 
   header{
     @include clearfix;
@@ -379,6 +379,14 @@ footer{
     h3{
       font-size:24px;
       font-family:'Open Sans', sans-serif;
+    }
+  }
+
+  #more{
+    padding-top:10px;
+    @include opacity(.6);
+    a{
+      text-decoration:none;
     }
   }
 
