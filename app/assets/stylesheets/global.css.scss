@@ -19,6 +19,7 @@ a{
   color: $black;
   &:hover{
     color: $black;
+    @include scale(1.1);
   }
   display:inline-block;
   &:visited{
@@ -98,6 +99,7 @@ body.data-index{
   @include box-shadow($dark_gray 0 0 10px);
   #trailer{
     margin:10px 0 2px;
+    text-align:center;
   }
 }
 
@@ -105,9 +107,10 @@ body.data-index{
   height:295px;
   margin-bottom:30px;
   h1{
-    font-size:190px;
+    font-size:10px;
     margin-bottom:25px;
     display: inline;
+    visibility:hidden;
   }
   h3{
     padding-top:40px;
@@ -218,7 +221,7 @@ footer{
 @media only screen and ( min-width: 491px ){
 
   // elements to hide from non-mobile
-  #next,a#showtimes,#rating { display:none }
+  #next,a#showtimes,#rating,header span { display:none }
 
   header{
     @include clearfix;
@@ -276,6 +279,7 @@ footer{
         color: $white;
       }
     }
+
     input.hover{
       &.placeholder{ 
         color:$white;
@@ -289,11 +293,28 @@ footer{
     }
   }
 
-  #recommendation h1{
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:-5px;
-    cursor:pointer;
+  #recommendation{
+    h1{
+        font-weight:700;
+        text-transform:uppercase;
+        letter-spacing:-5px;
+        cursor:pointer;
+    }
+  }
+
+  // .listing, #theaters ul.times{
+  //   font-size:220%;
+  // }
+
+  .listing{
+    font-size:24px;
+  }
+
+  #theaters ul.times{
+    font-size: 16px;
+    li{
+      padding:0 10px;
+    }
   }
 
 }
@@ -353,5 +374,16 @@ footer{
     padding:5px;
     margin-bottom:20px;
   }
+
+  #recommendation{
+    h3{
+      font-size:24px;
+      font-family:'Open Sans', sans-serif;
+    }
+  }
+
+  // .listing:last-child{
+  //   display:none;
+  // }
 
 }

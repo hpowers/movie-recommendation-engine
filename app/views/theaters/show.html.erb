@@ -5,6 +5,13 @@
     <span><%= @recommendation.movie.score %></span>
     <a href="#" id="showtimes" ><%= @recommendation.zip_code %></a>
 
+    <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form'} do |f| %>
+
+      <%= f.text_field :zip, :placeholder => @recommendation.zip_code %><br>
+      <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
+
+    <% end %>   
+
   </header>
 
   <div id="main" role="main">
@@ -25,7 +32,9 @@
     <div id="recommendation">
       
       <h3>you should see...</h3>
-      <h1><%= @recommendation.movie.title %></h1>
+      <h1>
+        <%= @recommendation.movie.title %><%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next2" %>
+      </h1>
 
     </div>
 
@@ -66,20 +75,9 @@
 
     <div id="theaters" data-id="<%= params[:id] %>">loading showtimes...</div>
 
-    <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form'} do |f| %>
-
-      <%= f.text_field :zip, :placeholder => "@recommendation.zip_code" %><br>
-      <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>
-      <%= f.submit 'Update Showtimes', class: 'btn' %>
-
-    <% end %>    
-
   </div>
 </div> <!--! end of #container -->
 
-<div id="debug">
-  <%= debug(params) if Rails.env.development? %>  
-</div>
 
 
 

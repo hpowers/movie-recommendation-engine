@@ -120,11 +120,17 @@ function mobileTitle(){
   var max_height = 175;
   var title = $('#recommendation h1');
 
+  // set default font size
+    var def_font_size = ($(window).height() - $('header').height()) / 6
+    title.css('font-size',def_font_size+'px');
+
   while (title.width() > max_width || title.height() > max_height) {
     var current_size = parseInt(title.css('font-size'));
 
     $('#recommendation h1').css('font-size',(current_size-1)+'px');
   }
+
+  title.css('visibility','visible');
 }
 
 function title(){
@@ -145,11 +151,22 @@ function title(){
     $('#recommendation h1').css('font-size',(current_size-1)+'px');
   }
   fixMargin();
+  title.css('visibility','visible');
 }
 
 function fixMargin(){
-  var margin = ($(window).height() - $('header').height() - $('#recommendation').height())/2;
-  margin = .9*margin
+  // var margin = ($(window).height() - $('header').height() - $('#recommendation').height())/2;
+  var margin = ( $(window).height() - $('#recommendation').height() )/2;
+
+  showtime_adjust = 0;
+  if ($('#theaters').height()) {
+    // showtime_adjust = $('#theaters').height();
+    showtime_adjust = 60;
+  };
+
+  margin = margin - $('header').height() - showtime_adjust;
+  // margin = margin - showtime_adjust;
+  // margin = .9*margin
   if (margin < 1) { margin = 0};
   $('#recommendation').css('margin-top', margin+'px');
 }
