@@ -76,6 +76,7 @@ body.data-index{
   }
   a{
     text-decoration:underline;
+    @include scale(1);
   }
   .dataTables_filter{
     margin-bottom:10px;
