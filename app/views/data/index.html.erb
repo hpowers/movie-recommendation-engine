@@ -32,8 +32,8 @@
           <%= truncate(movie.title) %>
         </a>
       </td>
-      <td><%= movie.score %></td>
-      <td class="score_adjustment" data="<%= movie.id %>"><%= movie.score_adjustment %></td>
+      <td id="score-<%= movie.id %>" ><%= movie.score %></td>
+      <td class="score_adjustment" data-id="<%= movie.id %>"><%= movie.score_adjustment %></td>
       <td><%= movie.rt_datum.critics_score %></td>
       <td><%= movie.imdb_datum.metacritic %></td>
       <td><%= movie.rt_datum.audience_score %></td>  
@@ -67,7 +67,7 @@
 <a href="#" id="update_score">update brave score</a>
 
 <br><br><br><br><br><br>
-<%= form_for :update, url: movie_path( 1 ), :method => :put do |f|  %>
+<%= form_for :update, url: movie_path( 1 ), :method => :put, :html => {:id => 'update_form'} do |f|  %>
 <%= f.label :score_adjustment %><br>
 <%= f.text_field :score_adjustment %><br>
 <%= f.submit %>

@@ -1,4 +1,5 @@
 require 'recommendations'
+require 'score'
 
 class MoviesController < ApplicationController
 
@@ -20,6 +21,7 @@ class MoviesController < ApplicationController
   end
 
   def update
+
     id = params[:id]
 
     movie = Movie.find(id)
@@ -27,6 +29,14 @@ class MoviesController < ApplicationController
     movie.score_adjustment = params[:update][:score_adjustment].to_i
 
     movie.save
+
+    Scoring.score(movie)
+    
+  end
+
+  def score
+    movie = Movie.find(params[:id])
+    render :text => movie.score
   end
 
 end

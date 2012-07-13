@@ -4,6 +4,9 @@ class TheatersController < ApplicationController
 
   def show
     @recommendation = Recommendations.new( params[:movie_id], params[:id] )
+    
+    # remove this
+    cookies.delete(:zip_code)
 
     respond_to do |format|
 
@@ -35,12 +38,5 @@ class TheatersController < ApplicationController
 
   end
 
-  def json
-
-    
-
-    render json: @theaters
-
-  end
 end
 
