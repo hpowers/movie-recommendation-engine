@@ -31,12 +31,9 @@ class MoviesController < ApplicationController
     movie.save
 
     Scoring.score(movie)
-    
-  end
 
-  def score
-    movie = Movie.find(params[:id])
     render :text => movie.score
+    
   end
 
 end
