@@ -441,7 +441,7 @@ module UpdateHsx
 
         puts 'using google'
 
-        search_for = "HSX.com MovieStock : #{name}"
+        search_for = "HSX.com MovieStock : #{name} site:hsx.com"
         search_for = URI.escape(search_for)
       
         search_url = "http://www.google.com/search?q=#{search_for}&btnI=3564"
