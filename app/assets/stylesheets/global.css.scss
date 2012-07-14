@@ -35,40 +35,6 @@ b{
   height:100%;
 }
 
-// #debug{ display:none }
-
-// body2{
-//   background: $df;
-//   #container{
-//     position:absolute;
-//     height:430px;
-//     top:50%;
-//     left:50%;
-//     width:330px;
-//     margin-top: -210px;
-//     margin-left:-160px;
-//     background:$gradient_bg_dark;
-//     overflow:scroll;
-//     overflow-x:hidden;
-//     @include background(radial-gradient($gradient_bg_light, $gradient_bg_dark 100%));
-//   }
-//   #debug{
-//     // display:inline;
-//     width:100%;
-//     font-family:Arial, Helvetica, sans-serif;
-//     font-size:20px;
-//     line-height: 23px;
-//     margin-bottom:20px;
-//     position:absolute;
-//     bottom:5px;
-//   }
-// }
-// .theaters-show2 #container{
-//   width:320px;
-//   overflow:hidden;
-//   @include box-shadow($black 0 0 40px);
-// }
-
 body.viewer{
   background: $df;
   #phone_demo{
