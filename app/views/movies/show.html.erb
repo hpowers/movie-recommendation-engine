@@ -15,6 +15,33 @@
 
   <div id="main" role="main">
 
+    <div id="full_info">
+      <p>
+       <b>Critics Consensus</b>:
+       <%= @recommendation.movie.rt_datum.critics_consensus %>  
+      </p>
+
+
+      <div class="facts">
+        <p>
+          <span class="left">
+            Rated <%= @recommendation.movie.rt_datum.mpaa_rating %>
+          </span>
+          <span class="right">
+            Scored <%= @recommendation.movie.score %>
+          </span>
+          <span>
+            Runtime of <%= @recommendation.movie.rt_datum.runtime %> mins
+          </span>
+        </p>        
+      </div>
+
+      <p class="center">
+        <a href="#" class="watch_trailer" >Watch The Trailer</a>
+      </p>
+
+    </div>
+
     <div id="info_box">
       
       <p>

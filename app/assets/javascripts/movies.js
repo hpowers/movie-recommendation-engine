@@ -71,7 +71,7 @@ $(document).ready(function() {
 
         $('.zip_form').click(function(event) {
           $('.zip_form').unbind("hover");
-          $('#theaters_zip').attr('placeholder', 'ZIP?')
+          $('#theaters_zip').attr('placeholder', 'ZIP')
           status('enter your zip code to get showtimes for ...');
         });
 
@@ -93,6 +93,17 @@ $(document).ready(function() {
           status();
         });
 
+        $('#info').click(function(event) {
+          // console.log('info time');
+          $('#full_info').slideToggle();
+          return false;
+        });
+
+        $('a.watch_trailer').click(function(event) {
+          // Act on the event
+          return false;
+        });
+
         // $('#recommendation h1').hover(function() {
         //   status('watch a trailer for ...');
         // }, function() {
@@ -101,13 +112,13 @@ $(document).ready(function() {
 
       },
       exit: function() {
-        $(window).unbind("resize");
-        $('.arrow').unbind("hover");
-        $('.zip_form').unbind("hover");
-        $('.zip_form').unbind("click");
-        $('#info').unbind("hover");
+        $(window).unbind();
+        $('.arrow').unbind();
+        $('.zip_form').unbind();
+        $('#info').unbind();
         // $('#recommendation h1').unbind("hover");
         $('#recommendation').css('margin-top', 'auto');
+        $('#full_info').css('display','none')
       }
   });
 

@@ -84,6 +84,10 @@ body.data-index{
   }
 }
 
+#main{
+  margin-top:-2px;
+}
+
 #recommendation{
   height:295px;
   margin-bottom:30px;
@@ -206,6 +210,9 @@ footer{
 
   header{
     @include clearfix;
+    a:hover{
+      @include scale(1);
+    }
   }
 
   #info{
@@ -223,6 +230,46 @@ footer{
     &:hover{
       color:$white;
       cursor:pointer;
+    }
+  }
+
+  #full_info{
+    background:$white;
+    width:400px;
+    margin-left: (80px/1440px*100)+0%;
+    color:#616161;
+    text-align:left;
+    display:none;
+    p{
+      padding:8px;
+    }
+    span{
+      text-align:center;
+      display:block;
+      margin:auto;
+    }
+    .left{
+      position: absolute;
+      left: 8px;
+    }
+    .right{
+      position: absolute;
+      right: 8px;
+    }
+    .center{
+      text-align:center;
+    }
+
+    a{
+      color: $white;
+      background: (adjust-lightness(#616161,5));
+      padding:5px 10px;
+      
+      // background:$dark_gray;
+      // color:#616161;
+    }
+    .facts{
+      position: relative;
     }
   }
 
@@ -305,7 +352,7 @@ footer{
 
 @media only screen and ( max-width: 490px ){
   // hide from mobile
-  .zip_form,.arrow{ display:none }
+  .zip_form,.arrow,#full_info{ display:none }
 
   header{
     a{
