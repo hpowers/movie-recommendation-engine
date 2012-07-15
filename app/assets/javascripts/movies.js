@@ -176,6 +176,15 @@ function fixMargin(){
   };
 
   margin = margin - $('header').height() - showtime_adjust;
+
+  // trailer formatting
+  // if ($('#yt_trailer').height()) {
+  //   // margin = margin - $('#yt_trailer').height();
+  //   margin = ( $(window).height() - $('#yt_trailer').height() )/2;
+  //   margin = margin - $('header').height() - $('#recommendation h3').height();
+  // };
+
+
   // margin = margin - showtime_adjust;
   // margin = .9*margin
   if (margin < 1) { margin = 0};

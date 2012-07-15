@@ -328,6 +328,11 @@ footer{
         letter-spacing:-5px;
         cursor:pointer;
     }
+    #yt_trailer{
+      display:block;
+      display: none;
+      @include clearfix;
+    }
   }
 
   // .listing, #theaters ul.times{
@@ -352,7 +357,7 @@ footer{
 
 @media only screen and ( max-width: 490px ){
   // hide from mobile
-  .zip_form,.arrow,#full_info{ display:none }
+  .zip_form,.arrow,#full_info, #yt_trailer{ display:none }
 
   header{
     a{
