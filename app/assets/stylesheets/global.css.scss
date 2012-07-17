@@ -108,13 +108,13 @@ body.data-index{
     width:1em;
     height:1em;
   }
-  span{
-    font-size:25px;
-    padding:10px;
-    background: $dark_gray;
-    color:$white;
-    @include border-radius(100%); 
-  }
+  // span{
+  //   font-size:25px;
+  //   padding:10px;
+  //   background: $dark_gray;
+  //   color:$white;
+  //   @include border-radius(100%); 
+  // }
   #rating{
     background: $dark_gray;
     color:$white;

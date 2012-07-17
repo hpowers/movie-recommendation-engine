@@ -104,11 +104,20 @@ $(document).ready(function() {
           return false;
         });
 
-        // $('#recommendation h1').hover(function() {
-        //   status('watch a trailer for ...');
-        // }, function() {
-        //   status();
-        // });
+        $('#recommendation h1 span').click(function(event) {
+          // Act on the event
+          $('#yt_trailer').toggle();
+          fixMargin();
+          // $('#yt_trailer').fadeIn(function(){
+            // fixMargin();
+          // });
+        });
+
+        $('#recommendation h1 span').hover(function() {
+          status('watch a trailer for ...');
+        }, function() {
+          status();
+        });
 
       },
       exit: function() {
@@ -152,6 +161,7 @@ function title(){
   // set default font size
   var def_font_size = ($(window).height() - $('header').height()) / 6
   title.css('font-size',def_font_size+'px');
+  // $('#recommendation h1').css('font-size',def_font_size+'px');
 
   while (title.width() > max_width ||
         title.height() > parseInt(title.css('line-height'))*2)
@@ -163,6 +173,7 @@ function title(){
   }
   fixMargin();
   title.css('visibility','visible');
+  // $('#recommendation h1').css('visibility','visible');
 }
 
 function fixMargin(){
@@ -178,11 +189,11 @@ function fixMargin(){
   margin = margin - $('header').height() - showtime_adjust;
 
   // trailer formatting
-  // if ($('#yt_trailer').height()) {
-  //   // margin = margin - $('#yt_trailer').height();
-  //   margin = ( $(window).height() - $('#yt_trailer').height() )/2;
-  //   margin = margin - $('header').height() - $('#recommendation h3').height();
-  // };
+  if ($('#yt_trailer').css('display')!='none') {
+    // margin = margin - $('#yt_trailer').height();
+    margin = ( $(window).height() - $('#yt_trailer').height() )/2;
+    margin = margin - $('header').height() - $('#recommendation h3').height() - $('#info').height();
+  };
 
 
   // margin = margin - showtime_adjust;

@@ -28,7 +28,7 @@
             Rated <%= @recommendation.movie.rt_datum.mpaa_rating %>
           </span>
           <span class="right">
-            Scored <%= @recommendation.movie.score %>
+            TMA Score <%= @recommendation.movie.score %>
           </span>
           <span>
             Runtime of <%= @recommendation.movie.rt_datum.runtime %> mins
@@ -63,7 +63,10 @@
       
       <h3>you should see ...</h3>
       <h1>
-        <%= @recommendation.movie.title %><%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_path( @recommendation.ranking + 1 ), :id => "next2" %>
+        <span>
+          <%= @recommendation.movie.title %>  
+        </span>
+        <%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_path( @recommendation.ranking + 1 ), :id => "next2" %>
       </h1>
       <div id="rating"><%= @recommendation.movie.score %></div>
 
