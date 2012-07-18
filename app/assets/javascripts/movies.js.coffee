@@ -4,17 +4,18 @@ firstScriptTag = document.getElementsByTagName("script")[0]
 firstScriptTag.parentNode.insertBefore tag, firstScriptTag
 
 
-
-onYouTubePlayerAPIReady = ->
+player = undefined
+window.onYouTubePlayerAPIReady = ->
+  console.log('this is a test')
   player = new YT.Player("player",
     events:
       onReady: onPlayerReady
       onStateChange: onPlayerStateChange
   )
 
-onPlayerReady = (event) ->
+window.onPlayerReady = (event) ->
   event.target.setPlaybackQuality "hd720"
-onPlayerStateChange = (event) ->
+window.onPlayerStateChange = (event) ->
   event.target.setPlaybackQuality "hd720"  if event.data is YT.PlayerState.BUFFERING
 stopVideo = ->
   player.stopVideo()
