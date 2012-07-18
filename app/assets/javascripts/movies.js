@@ -18,7 +18,11 @@ $(document).ready(function() {
       breakpoint: 'handheld',
       enter: function() {
         $('#info').click(function(event) {
-          $('#mobile_info').slideToggle();
+          // $('#mobile_info').slideToggle();
+          // update the about_movie specs
+          // slideToggle
+          $('#about_the_movie').slideToggle();
+
           $('#recommendation').toggleClass('pointer');
           return false;
         });
@@ -95,15 +99,15 @@ $(document).ready(function() {
 
         $('#info').click(function(event) {
           // console.log('info time');
-          var full_info = $('#full_info');
+          var about_the_movie = $('#about_the_movie');
           var    offset = $(this).offset();
 
-          full_info.css({
+          about_the_movie.css({
              top: offset.top,
             left: offset.left+34
           });
 
-          $('#full_info').toggle();
+          $('#about_the_movie').toggle();
           // change the x
 
           // text = $(this).text()
@@ -117,7 +121,7 @@ $(document).ready(function() {
           return false;
         });
 
-        $('a.watch_trailer').click(function(event) {
+        $('#watch_desktop_trailer a').click(function(event) {
           // Act on the event
           watch_trailer();
           return false;
@@ -125,18 +129,18 @@ $(document).ready(function() {
 
         $('#recommendation h1 span').click(function(event) {
           // Act on the event
-          // $('#yt_trailer').toggle();
+          // $('#desktop_trailer').toggle();
           watch_trailer();
-          // $('#yt_trailer').fadeIn(function(){
+          // $('#desktop_trailer').fadeIn(function(){
             // fixMargin();
           // });
           return false;
         });
 
         function watch_trailer () {
-          $('#full_info').hide();
+          $('#about_the_movie').hide();
           // insure i goes back to an x
-          $('#yt_trailer').toggle();
+          $('#desktop_trailer').toggle();
           fixMargin();
         }
 
@@ -155,7 +159,7 @@ $(document).ready(function() {
         $('#recommendation h1 span').unbind();
         // $('#recommendation h1').unbind("hover");
         $('#recommendation').css('margin-top', 'auto');
-        $('#full_info').css('display','none')
+        $('#about_the_movie').css('display','none')
       }
   });
 
@@ -217,8 +221,8 @@ function fixMargin(){
   margin = margin - $('header').height() - showtime_adjust;
 
   // trailer formatting
-  if ($('#yt_trailer').css('display')!='none') {
-    // margin = margin - $('#yt_trailer').height();
+  if ($('#desktop_trailer').css('display')!='none') {
+    // margin = margin - $('#desktop_trailer').height();
 
     // resize trailer (this can potentially be replaced with better API calls)
     t_max_width = $(window).width()*.95;
@@ -231,12 +235,12 @@ function fixMargin(){
       t_height = t_width * 9/16;
     };
 
-    $('#yt_trailer iframe').css({
+    $('#desktop_trailer iframe').css({
        width: t_width,
       height: t_height
     })
 
-    margin = ( $(window).height() - $('#yt_trailer').height() - 50 )/2;
+    margin = ( $(window).height() - $('#desktop_trailer').height() - 50 )/2;
     margin = margin - $('header').height() - $('#recommendation h3').height() - $('#info').height();
   };
 

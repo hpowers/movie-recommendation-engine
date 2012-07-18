@@ -71,18 +71,7 @@ body.data-index{
   padding-top:20px;
 }
 
-#mobile_info{
-  font-size: 12px;
-  display:none;
-  background: $gradient_bg_light;
-  text-align: left;
-  padding:10px;
-  @include box-shadow($dark_gray 0 0 10px);
-  #trailer{
-    margin:10px 0 2px;
-    text-align:center;
-  }
-}
+
 
 #main{
   margin-top:-2px;
@@ -143,7 +132,7 @@ body.data-index{
     margin-top:5px;
     padding-top:0;
   }
-  span{ display:none; }
+  // span{ display:none; }
 }
 
 
@@ -190,11 +179,11 @@ body.data-index{
 
 
 
-footer{
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-}
+// footer{
+//   position: absolute;
+//   bottom: 10px;
+//   width: 100%;
+// }
 
 #showtimes footer{
   position: relative;
@@ -202,11 +191,57 @@ footer{
   @include opacity(.6);
 }
 
+#about_the_movie{
+  background:$white;
+  width:400px;
+  color:#616161;
+  text-align:left;
+  display:none;
+  position: absolute;
+
+  p{
+    padding:8px;
+  }
+  span{
+    text-align:center;
+    display:block;
+    margin:auto;
+  }
+  .left{
+    position: absolute;
+    left: 8px;
+  }
+  .right{
+    position: absolute;
+    right: 8px;
+  }
+  .center{
+    text-align:center;
+  }
+
+  #watch_desktop_trailer{
+    text-align:center;
+    a{
+      color: $white;
+      background: (adjust-lightness(#616161,5));
+      padding:5px 10px;
+    }
+  }
+  
+  .facts{
+    position: relative;
+  }
+
+  #mobile_trailer{
+    display: none;
+  }
+}
+
 
 @media only screen and ( min-width: 491px ){
 
   // elements to hide from non-mobile
-  #next,a#showtimes,#rating,header span,#more { display:none }
+  #next,a#showtimes,#rating,header span,#more,#mobile_info { display:none }
 
   header{
     @include clearfix;
@@ -233,46 +268,7 @@ footer{
     }
   }
 
-  #full_info{
-    background:$white;
-    width:400px;
-    color:#616161;
-    text-align:left;
-    display:none;
-    position: absolute;
 
-    p{
-      padding:8px;
-    }
-    span{
-      text-align:center;
-      display:block;
-      margin:auto;
-    }
-    .left{
-      position: absolute;
-      left: 8px;
-    }
-    .right{
-      position: absolute;
-      right: 8px;
-    }
-    .center{
-      text-align:center;
-    }
-
-    a{
-      color: $white;
-      background: (adjust-lightness(#616161,5));
-      padding:5px 10px;
-      
-      // background:$dark_gray;
-      // color:#616161;
-    }
-    .facts{
-      position: relative;
-    }
-  }
 
   .zip_form{
     cursor:pointer;
@@ -329,7 +325,7 @@ footer{
         letter-spacing:-5px;
         cursor:pointer;
     }
-    #yt_trailer{
+    #desktop_trailer{
       display:block;
       display: none;
       @include clearfix;
@@ -358,7 +354,7 @@ footer{
 
 @media only screen and ( max-width: 490px ){
   // hide from mobile
-  .zip_form,.arrow,#full_info, #yt_trailer{ display:none }
+  .zip_form,.arrow,#about_the_movie, #desktop_trailer{ display:none }
 
   header{
     a{
@@ -421,6 +417,42 @@ footer{
     @include opacity(.6);
     a{
       text-decoration:none;
+    }
+  }
+
+  // #mobile_info{
+  //   // position: absolute;
+  //   // bottom:0;
+
+  //   font-size: 12px;
+  //   display:none;
+  //   background: $gradient_bg_light;
+  //   text-align: left;
+  //   padding:10px;
+  //   @include box-shadow($dark_gray 0 0 10px);
+  //   #mobile_trailer{
+  //     margin:10px 0 2px;
+  //     text-align:center;
+  //   }
+  // }
+
+  #about_the_movie{
+    // position: absolute;
+    // bottom:0;
+    position: static;
+    width:auto;
+    color:$black;
+    font-size:12px;
+    background:$gradient_bg_light;
+    padding: 10px;
+    @include box-shadow($dark_gray 0 0 10px);
+    .facts {display: none}
+    #watch_desktop_trailer{display: none}
+    p{padding: 0}
+    #mobile_trailer{
+      display: block;
+      margin:10px 0 2px;
+      text-align:center;
     }
   }
 

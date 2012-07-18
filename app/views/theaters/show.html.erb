@@ -16,29 +16,55 @@
 
   <div id="main" role="main">
 
-    <div id="info_box">
-      
+    <article id="about_the_movie">
       <p>
-        <b>Critics Consensus</b>:
-        <%= @recommendation.movie.rt_datum.critics_consensus %> 
+       <b>Critics Consensus</b>:
+       <%= @recommendation.movie.rt_datum.critics_consensus %>  
       </p>
 
-      <div id="trailer">
+      <section class="facts">
+        <p>
+          <span class="left">
+            Rated <%= @recommendation.movie.rt_datum.mpaa_rating %>
+          </span>
+          <span class="right">
+            TMA Score <%= @recommendation.movie.score %>
+          </span>
+          <span>
+            Runtime of <%= @recommendation.movie.rt_datum.runtime %> mins
+          </span>
+        </p>        
+      </section>
+
+      <p id="watch_desktop_trailer">
+        <a href="#" >Watch The Trailer</a>
+      </p>
+
+      <div id="mobile_trailer">
         <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
       </div>
 
-    </div>
+    </article> <!--! end of #about_the_movie -->
 
-    <div id="recommendation">
+    <section id="recommendation">
+
+      <div id="desktop_trailer">
+        <iframe width="1050" height="590" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+      </div>
       
       <h3>you should see...</h3>
       <h1>
-        <%= @recommendation.movie.title %><%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next2" %>
+        <span>
+          <%= @recommendation.movie.title %>
+        </span>
+        <%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next2" %>
       </h1>
 
-    </div>
+    </section> <!--! end of #recommendation -->
 
-    <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next" %>
+    <nav>
+      <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next" %>  
+    </nav>
 
     <script id="showtimes-template" type="text/x-handlebars-template">
     

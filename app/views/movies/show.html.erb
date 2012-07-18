@@ -15,28 +15,7 @@
 
   <div id="main" role="main">
 
-    <section id="recommendation">
-
-      <div id="yt_trailer">
-        <iframe width="1050" height="590" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
-      </div>
-      
-      <h3>you should see ...</h3>
-      <h1>
-        <span>
-          <%= @recommendation.movie.title %>  
-        </span>
-        <%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_path( @recommendation.ranking + 1 ), :id => "next2" %>
-      </h1>
-      <div id="rating"><%= @recommendation.movie.score %></div>
-
-    </section> <!--! end of #recommendation -->
-
-    <nav>
-      <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_path( @recommendation.ranking + 1 ), :id => "next" %>  
-    </nav>
-
-    <article id="full_info">
+    <article id="about_the_movie">
       <p>
        <b>Critics Consensus</b>:
        <%= @recommendation.movie.rt_datum.critics_consensus %>  
@@ -56,26 +35,37 @@
         </p>        
       </section>
 
-      <p class="center">
-        <a href="#" class="watch_trailer" >Watch The Trailer</a>
+      <p id="watch_desktop_trailer">
+        <a href="#" >Watch The Trailer</a>
       </p>
 
-    </article> <!--! end of #full_info -->
-
-    <article id="mobile_info">
-      
-      <p>
-        <b>Critics Consensus</b>:
-        <%= @recommendation.movie.rt_datum.critics_consensus %> 
-      </p>
-
-      <div id="trailer">
+      <div id="mobile_trailer">
         <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
       </div>
 
-    </article> <!--! end of #mobile_info -->
+    </article> <!--! end of #about_the_movie -->
 
 
+    <section id="recommendation">
+
+      <div id="desktop_trailer">
+        <iframe width="1050" height="590" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+      </div>
+      
+      <h3>you should see ...</h3>
+      <h1>
+        <span>
+          <%= @recommendation.movie.title %>
+        </span>
+        <%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_path( @recommendation.ranking + 1 ), :id => "next2" %>
+      </h1>
+      <div id="rating"><%= @recommendation.movie.score %></div>
+
+    </section> <!--! end of #recommendation -->
+
+    <nav>
+      <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_path( @recommendation.ranking + 1 ), :id => "next" %>  
+    </nav>
 
 
 
