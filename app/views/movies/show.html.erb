@@ -39,6 +39,7 @@
         <a href="#" >Watch The Trailer</a>
       </p>
 
+
       <div id="mobile_trailer">
         <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
       </div>
@@ -49,7 +50,7 @@
     <section id="recommendation">
 
       <div id="desktop_trailer">
-        <iframe width="1050" height="590" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+        <iframe id='player' width="1050" height="590" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
       </div>
       
       <h3>you should see ...</h3>

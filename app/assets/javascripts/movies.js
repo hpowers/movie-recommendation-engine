@@ -1,3 +1,63 @@
+// 
+// YouTube iFrame API Code
+//
+
+// 1. This code loads the IFrame Player API code asynchronously.
+var tag = document.createElement('script');
+tag.src = "http://www.youtube.com/player_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 2. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+function onYouTubePlayerAPIReady() {
+  player = new YT.Player('player', {
+    playerVars: {
+      'modestbranding': 1,
+      'rel': 0,
+      'showinfo': 0,
+      'showsearch': 0,
+      'autohide': 1
+    },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+// 3. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+  // event.target.playVideo();
+  event.target.setPlaybackQuality('hd720');
+}
+
+// 4. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+// var done = false;
+function onPlayerStateChange(event) {
+  // if (event.data == YT.PlayerState.PLAYING && !done) {
+  //   setTimeout(stopVideo, 6000);
+  //   done = true;
+  // }
+  if (event.data == YT.PlayerState.BUFFERING) {
+    event.target.setPlaybackQuality('hd720');
+  }
+}
+function stopVideo() {
+  player.stopVideo();
+}
+
+function playVideo() {
+  player.playVideo();
+}
+
+//
+// END YouTube iFrame API Code
+//
+
 $(document).ready(function() {
 
   // call jRespond and add breakpoints
@@ -123,6 +183,7 @@ $(document).ready(function() {
 
         $('#watch_desktop_trailer a').click(function(event) {
           // Act on the event
+          // $('#info').click();
           watch_trailer();
           return false;
         });
@@ -131,6 +192,7 @@ $(document).ready(function() {
           // Act on the event
           // $('#desktop_trailer').toggle();
           watch_trailer();
+          $('#recommendation h1 span').unbind();
           // $('#desktop_trailer').fadeIn(function(){
             // fixMargin();
           // });
@@ -139,6 +201,12 @@ $(document).ready(function() {
 
         function watch_trailer () {
           $('#about_the_movie').hide();
+
+          if ($('#info').text()=='x') {
+            $('#info').html('&nbsp;&nbsp;i&nbsp;&nbsp;');
+          };
+
+          player.playVideo();
           // insure i goes back to an x
           $('#desktop_trailer').toggle();
           fixMargin();
@@ -159,7 +227,9 @@ $(document).ready(function() {
         $('#recommendation h1 span').unbind();
         // $('#recommendation h1').unbind("hover");
         $('#recommendation').css('margin-top', 'auto');
-        $('#about_the_movie').css('display','none')
+        $('#about_the_movie').css('display','none');
+        player.stopVideo();
+        $('#desktop_trailer').css('display','none');
       }
   });
 
@@ -235,6 +305,14 @@ function fixMargin(){
       t_height = t_width * 9/16;
     };
 
+    if ($('#theaters')) {
+      t_max_height = $(window).height() - $('header').height() - $('#recommendation h3').height() - $('#recommendation h1').height() - $('#theaters').height() - 50;
+      if (t_height>t_max_height) {
+        t_height = t_max_height;
+        t_width = t_height*16/9;
+      };
+    };
+
     $('#desktop_trailer iframe').css({
        width: t_width,
       height: t_height
@@ -242,12 +320,16 @@ function fixMargin(){
 
     margin = ( $(window).height() - $('#desktop_trailer').height() - 50 )/2;
     margin = margin - $('header').height() - $('#recommendation h3').height() - $('#info').height();
+
+    if ($('#theaters')) {
+      margin = margin - $('#theaters').height();
+    };
   };
 
 
   // margin = margin - showtime_adjust;
   // margin = .9*margin
-  if (margin < 1) { margin = 0};
+  if (margin < 1) { margin = 20};
   $('#recommendation').css('margin-top', margin+'px');
 }
 
