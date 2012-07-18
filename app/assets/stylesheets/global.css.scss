@@ -236,10 +236,11 @@ footer{
   #full_info{
     background:$white;
     width:400px;
-    margin-left: (80px/1440px*100)+0%;
     color:#616161;
     text-align:left;
     display:none;
+    position: absolute;
+
     p{
       padding:8px;
     }

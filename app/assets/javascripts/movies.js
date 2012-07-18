@@ -95,23 +95,49 @@ $(document).ready(function() {
 
         $('#info').click(function(event) {
           // console.log('info time');
-          $('#full_info').slideToggle();
+          var full_info = $('#full_info');
+          var    offset = $(this).offset();
+
+          full_info.css({
+             top: offset.top,
+            left: offset.left+34
+          });
+
+          $('#full_info').toggle();
+          // change the x
+
+          // text = $(this).text()
+
+          if ($(this).text()=="x") {
+            $(this).html('&nbsp;&nbsp;i&nbsp;&nbsp;');
+          } else{
+            $(this).text('x')
+          };
+
           return false;
         });
 
         $('a.watch_trailer').click(function(event) {
           // Act on the event
+          watch_trailer();
           return false;
         });
 
         $('#recommendation h1 span').click(function(event) {
           // Act on the event
-          $('#yt_trailer').toggle();
-          fixMargin();
+          // $('#yt_trailer').toggle();
+          watch_trailer();
           // $('#yt_trailer').fadeIn(function(){
             // fixMargin();
           // });
+          return false;
         });
+
+        function watch_trailer () {
+          $('#full_info').hide();
+          $('#yt_trailer').toggle();
+          fixMargin();
+        }
 
         $('#recommendation h1 span').hover(function() {
           status('watch a trailer for ...');
@@ -191,6 +217,15 @@ function fixMargin(){
   // trailer formatting
   if ($('#yt_trailer').css('display')!='none') {
     // margin = margin - $('#yt_trailer').height();
+
+    // resize trailer (this can potentially be replaced with better API calls)
+    t_height = $(window).height() * .61;
+    t_width = t_height*16/9;
+    $('#yt_trailer iframe').css({
+       width: t_width,
+      height: t_height
+    })
+
     margin = ( $(window).height() - $('#yt_trailer').height() )/2;
     margin = margin - $('header').height() - $('#recommendation h3').height() - $('#info').height();
   };
