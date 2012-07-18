@@ -9,8 +9,6 @@ gem 'sqlite3'
 gem 'json'
 gem 'nokogiri'
 gem 'fandango'
-gem 'newrelic_rpm'
-gem 'awesome_print'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,6 +25,10 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'newrelic_rpm'
+  gem 'awesome_print'
+
+  # rspec
   gem 'rspec-rails'
   gem 'guard-rspec'
 

@@ -1,3 +1,4 @@
+// SCSS AND CSS INCLUDES
 @import "_base";
 
 html{
@@ -7,7 +8,7 @@ html{
 
 body{
   text-align:center;
-  font-family:'Open Sans', sans-serif;
+  font-family:$default_font_stack;
   font-size:16px;
   color: $black;
   background:$gradient_bg_dark;
@@ -27,56 +28,56 @@ a{
   }
 }
 
-b{
-  font-weight:700;
-}
+b{ font-weight:700 }
+.pointer{ cursor: pointer }
+.center{ text-align:center }
 
-#container{
-  height:100%;
-}
+// -----------------------------------------------------------------------------
+// BEGIN Movies & Theaters Controller
 
-body.viewer{
-  background: $df;
-  #phone_demo{
-    position:absolute;
-    height:430px;
-    width:330px;
-    top:50%;
-    left:50%;
-    margin-top:-215px;
-    margin-left:-115px;
-    @include box-shadow($black 0 0 40px);
+#container{ height:100% }
+#main{ margin-top:-2px }
+
+
+// About The Movie Box
+#about_the_movie{
+  background:$white;
+  width:400px;
+  color:$light_gray;
+  text-align:left;
+  display:none;
+  position: absolute;
+
+  p{ padding:8px}
+  span{
+    text-align:center;
+    display:block;
+    margin:auto;
   }
+  .left{
+    position: absolute;
+    left: 8px;
+  }
+  .right{
+    position: absolute;
+    right: 8px;
+  }
+
+  #watch_desktop_trailer{
+    text-align:center;
+    a{
+      color: $white;
+      background: (adjust-lightness($light_gray,5));
+      padding:5px 10px;
+    }
+  }
+  
+  .facts{ position: relative }
+
+  #mobile_trailer{ display: none }
 }
 
-body.data-index{
-  background: $true_white;
-  table{
-    padding:10px 0;
-  }
-  a{
-    text-decoration:underline;
-    @include scale(1);
-  }
-  .dataTables_filter{
-    margin-bottom:10px;
-  }
-  .dataTables_info,.dataTables_paginate{
-    margin-top:10px;
-  }
-}
-#movie_data_container{
-  width:98%;
-  margin:auto;
-  padding-top:20px;
-}
-
-
-
-#main{
-  margin-top:-2px;
-}
-
+// Movie Recommendation
 #recommendation{
   height:295px;
   margin-bottom:30px;
@@ -97,13 +98,6 @@ body.data-index{
     width:1em;
     height:1em;
   }
-  // span{
-  //   font-size:25px;
-  //   padding:10px;
-  //   background: $dark_gray;
-  //   color:$white;
-  //   @include border-radius(100%); 
-  // }
   #rating{
     background: $dark_gray;
     color:$white;
@@ -119,38 +113,72 @@ body.data-index{
   }
 }
 
-.pointer{
-  cursor: pointer;
+// Zip Code Form For Showtimes
+.zip_form{
+  cursor:pointer;
+  float:right;
+  margin-right: (80px/1440px*100)+0%; 
+  width:142px;
+  margin-top:3%;
+  input{
+    cursor:pointer;
+    font-size:20px;
+    font-family:'Open Sans', sans-serif;
+    width:142px;
+    height:34px;
+    border:none;
+    background:$dark_gray;
+    color:$light_gray;
+    text-align:center;
+    line-height:34px;
+    &.placeholder{ 
+      color:$light_gray;
+      font-family:'Open Sans', sans-serif;
+    }
+    &:-moz-placeholder{ 
+      color:$light_gray;
+      font-family:'Open Sans', sans-serif;
+    }
+    &::-webkit-input-placeholder{ 
+      color:$light_gray;
+      font-family:'Open Sans', sans-serif;
+    }
+    &:focus{
+      color: $white;
+    }
+  }
+
+  input.hover{
+    &.placeholder{ 
+      color:$white;
+    }
+    &:-moz-placeholder{ 
+      color:$white;
+    }
+    &::-webkit-input-placeholder{ 
+      color:$white;
+    }      
+  }
 }
 
 .theaters-show #recommendation{
   height:auto;
-  h1{
-    margin-bottom:20px;
-  }
+  h1{ margin-bottom:20px }
   h3{
     margin-top:5px;
     padding-top:0;
   }
-  // span{ display:none; }
 }
 
-
-
+// Theater Information
 #theaters{
-
-  a{
-    text-decoration:underline;
-  }
+  a{ text-decoration:underline }
 
   .listing{
     background: $gradient_bg_light;
     padding:7px 0;
     margin-bottom:9px;
     @include box-shadow(adjust-lightness($dark_gray,20) 0 0 5px);
-    &:last-child{
-      // display:none;
-    }
   }
 
   ul{
@@ -177,71 +205,17 @@ body.data-index{
   }
 }
 
-
-
-// footer{
-//   position: absolute;
-//   bottom: 10px;
-//   width: 100%;
-// }
-
 #showtimes footer{
   position: relative;
   padding-top:10px;
   @include opacity(.6);
 }
 
-#about_the_movie{
-  background:$white;
-  width:400px;
-  color:#616161;
-  text-align:left;
-  display:none;
-  position: absolute;
-
-  p{
-    padding:8px;
-  }
-  span{
-    text-align:center;
-    display:block;
-    margin:auto;
-  }
-  .left{
-    position: absolute;
-    left: 8px;
-  }
-  .right{
-    position: absolute;
-    right: 8px;
-  }
-  .center{
-    text-align:center;
-  }
-
-  #watch_desktop_trailer{
-    text-align:center;
-    a{
-      color: $white;
-      background: (adjust-lightness(#616161,5));
-      padding:5px 10px;
-    }
-  }
-  
-  .facts{
-    position: relative;
-  }
-
-  #mobile_trailer{
-    display: none;
-  }
-}
-
-
+// Desktop Optimized Media Query
 @media only screen and ( min-width: 491px ){
 
-  // elements to hide from non-mobile
-  #next,a#showtimes,#rating,header span,#more,#mobile_info { display:none }
+  // hide from non-mobile
+  #next,a#showtimes,#rating,header span,#more { display:none }
 
   header{
     @include clearfix;
@@ -252,7 +226,7 @@ body.data-index{
 
   #info{
     background:$dark_gray;
-    color:#616161;
+    color:$light_gray;
     height:34px;
     text-align:center;
     font-size: 20px;
@@ -265,56 +239,6 @@ body.data-index{
     &:hover{
       color:$white;
       cursor:pointer;
-    }
-  }
-
-
-
-  .zip_form{
-    cursor:pointer;
-    float:right;
-    margin-right: (80px/1440px*100)+0%; 
-    width:142px;
-    // height:34px;
-    margin-top:3%;
-    input{
-      cursor:pointer;
-      font-size:20px;
-      font-family:'Open Sans', sans-serif;
-      width:142px;
-      height:34px;
-      border:none;
-      background:$dark_gray;
-      color:#616161;
-      text-align:center;
-      line-height:34px;
-      &.placeholder{ 
-        color:#616161;
-        font-family:'Open Sans', sans-serif;
-      }
-      &:-moz-placeholder{ 
-        color:#616161;
-        font-family:'Open Sans', sans-serif;
-      }
-      &::-webkit-input-placeholder{ 
-        color:#616161;
-        font-family:'Open Sans', sans-serif;
-      }
-      &:focus{
-        color: $white;
-      }
-    }
-
-    input.hover{
-      &.placeholder{ 
-        color:$white;
-      }
-      &:-moz-placeholder{ 
-        color:$white;
-      }
-      &::-webkit-input-placeholder{ 
-        color:$white;
-      }      
     }
   }
 
@@ -332,10 +256,6 @@ body.data-index{
     }
   }
 
-  // .listing, #theaters ul.times{
-  //   font-size:220%;
-  // }
-
   .listing{
     font-size:24px;
   }
@@ -349,14 +269,15 @@ body.data-index{
 
 }
 
-
-
-
+// Mobile Optimized Media Query
 @media only screen and ( max-width: 490px ){
   // hide from mobile
   .zip_form,.arrow,#about_the_movie, #desktop_trailer{ display:none }
 
   header{
+    background:$true_black;
+    @include clearfix;
+    padding:10px;
     a{
       color:$white;
       &:hover{
@@ -366,16 +287,8 @@ body.data-index{
         color:$white;
       }
     }
-    background:$true_black;
-    
-    @include clearfix;
-    padding:10px;
-    #info{
-      float:left;
-    }
-    #showtimes{
-      float:right;
-    }
+    #info{ float:left }
+    #showtimes{ float:right }
   }
 
   .theaters-show header{
@@ -415,31 +328,11 @@ body.data-index{
   #more{
     padding-top:10px;
     @include opacity(.6);
-    a{
-      text-decoration:none;
-    }
+    a{ text-decoration:none }
   }
 
-  // #mobile_info{
-  //   // position: absolute;
-  //   // bottom:0;
-
-  //   font-size: 12px;
-  //   display:none;
-  //   background: $gradient_bg_light;
-  //   text-align: left;
-  //   padding:10px;
-  //   @include box-shadow($dark_gray 0 0 10px);
-  //   #mobile_trailer{
-  //     margin:10px 0 2px;
-  //     text-align:center;
-  //   }
-  // }
-
   #about_the_movie{
-    // position: absolute;
-    // bottom:0;
-    position: static;
+    position:static;
     width:auto;
     color:$black;
     font-size:12px;
@@ -455,9 +348,34 @@ body.data-index{
       text-align:center;
     }
   }
-
-  // .listing:last-child{
-  //   display:none;
-  // }
-
 }
+
+// -----------------------------------------------------------------------------
+// BEGIN Data Controller
+
+body.data-index{
+  background: $true_white;
+  table{ padding:10px 0 }
+  a{
+    text-decoration:underline;
+    @include scale(1);
+  }
+  .dataTables_filter{ margin-bottom:10px }
+  .dataTables_info,.dataTables_paginate{ margin-top:10px }
+}
+#movie_data_container{
+  width:98%;
+  margin:auto;
+  padding-top:20px;
+}
+
+td.score_adjustment{
+  &:hover{
+    background:#D3D6FF;
+    cursor:pointer;
+    border:1px #efefef;
+  }
+}
+
+// END Data Controller
+// -----------------------------------------------------------------------------
