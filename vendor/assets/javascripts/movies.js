@@ -44,6 +44,19 @@ function playVideo() {
 // END YouTube iFrame API
 //
 
+// call jRespond and add breakpoints
+var jRes = jRespond([
+    {
+        label: 'handheld',
+        enter: 0,
+        exit: 490
+    },{
+        label: 'desktop',
+        enter: 491,
+        exit: 10000
+    }
+]);
+
 $(document).ready(function() {
 
   // Objects
@@ -61,18 +74,7 @@ $(document).ready(function() {
   desktop_trailer = $('#desktop_trailer');
   theaters = $('#theaters');
 
-  // call jRespond and add breakpoints
-  var jRes = jRespond([
-      {
-          label: 'handheld',
-          enter: 0,
-          exit: 490
-      },{
-          label: 'desktop',
-          enter: 491,
-          exit: 10000
-      }
-  ]);
+
 
   // register enter and exit functions for a single breakpoint
   jRes.addFunc({
@@ -210,100 +212,100 @@ $(document).ready(function() {
         player.stopVideo();
       }
   });
-});
 
+  function mobileTitle(){
+    var max_width = 310, max_height = 175;
 
-function mobileTitle(){
-  var max_width = 310, max_height = 175;
+    // set default font size
+      var def_font_size = ($(window).height() - $('header').height()) / 6
+      recommendation_title.css('font-size',def_font_size+'px');
 
-  // set default font size
+    while (recommendation_title.width() > max_width || recommendation_title.height() > max_height) {
+      var current_size = parseInt(recommendation_title.css('font-size'));
+      recommendation_title.css('font-size',(current_size-1)+'px');
+    }
+
+    recommendation_title.css('visibility','visible');
+  }
+
+  function title(){
+    var max_width = $(window).width() * .90;
+
+    // set default font size
     var def_font_size = ($(window).height() - $('header').height()) / 6
     recommendation_title.css('font-size',def_font_size+'px');
 
-  while (recommendation_title.width() > max_width || recommendation_title.height() > max_height) {
-    var current_size = parseInt(recommendation_title.css('font-size'));
-    recommendation_title.css('font-size',(current_size-1)+'px');
+    while (recommendation_title.width() > max_width ||
+          recommendation_title.height() > parseInt(recommendation_title.css('line-height'))*2)
+    {
+      var current_size = parseInt(recommendation_title.css('font-size'));
+      if (current_size==90) {break;};
+
+      recommendation_title.css('font-size',(current_size-1)+'px');
+    }
+    fixMargin();
+    recommendation_title.css('visibility','visible');
   }
 
-  recommendation_title.css('visibility','visible');
-}
+  function fixMargin(){
+    window_height = $(window).height();
+    header_height = $('header').height()
 
-function title(){
-  var max_width = $(window).width() * .90;
+    var margin = ( window_height - $('#recommendation').height() )/2;
 
-  // set default font size
-  var def_font_size = ($(window).height() - $('header').height()) / 6
-  recommendation_title.css('font-size',def_font_size+'px');
-
-  while (recommendation_title.width() > max_width ||
-        recommendation_title.height() > parseInt(recommendation_title.css('line-height'))*2)
-  {
-    var current_size = parseInt(recommendation_title.css('font-size'));
-    if (current_size==90) {break;};
-
-    recommendation_title.css('font-size',(current_size-1)+'px');
-  }
-  fixMargin();
-  recommendation_title.css('visibility','visible');
-}
-
-function fixMargin(){
-  window_height = $(window).height();
-  header_height = $('header').height()
-
-  var margin = ( window_height - $('#recommendation').height() )/2;
-
-  showtime_adjust = 0;
-  if (theaters.height()) {
-    showtime_adjust = 60;
-  };
-
-  margin = margin - header_height - showtime_adjust;
-
-  // trailer formatting
-  if (desktop_trailer.css('display')!='none') {
-    t_max_width = $(window).width()*.95;
-
-    t_height = window_height * .61;
-    t_width = t_height*16/9;
-
-    if (t_width>t_max_width) {
-      t_width = t_max_width;
-      t_height = t_width * 9/16;
+    showtime_adjust = 0;
+    if (theaters.height()) {
+      showtime_adjust = 60;
     };
 
-    if (theaters) {
-      t_max_height = window_height - header_height - status_message.height() - recommendation_title.height() - theaters.height() - 50;
-      if (t_height>t_max_height) {
-        t_height = t_max_height;
-        t_width = t_height*16/9;
+    margin = margin - header_height - showtime_adjust;
+
+    // trailer formatting
+    if (desktop_trailer.css('display')!='none') {
+      t_max_width = $(window).width()*.95;
+
+      t_height = window_height * .61;
+      t_width = t_height*16/9;
+
+      if (t_width>t_max_width) {
+        t_width = t_max_width;
+        t_height = t_width * 9/16;
+      };
+
+      if (theaters) {
+        t_max_height = window_height - header_height - status_message.height() - recommendation_title.height() - theaters.height() - 50;
+        if (t_height>t_max_height) {
+          t_height = t_max_height;
+          t_width = t_height*16/9;
+        };
+      };
+
+      $('#desktop_trailer iframe').css({
+         width: t_width,
+        height: t_height
+      })
+
+      margin = ( window_height - desktop_trailer.height() - 50 )/2;
+      margin = margin - header_height - status_message.height() - info.height();
+
+      if (theaters) {
+        margin = margin - theaters.height();
       };
     };
 
-    $('#desktop_trailer iframe').css({
-       width: t_width,
-      height: t_height
-    })
+    if (margin < 1) { margin = 20};
+    recommendation.css('margin-top', margin+'px');
+  }
 
-    margin = ( window_height - desktop_trailer.height() - 50 )/2;
-    margin = margin - header_height - status_message.height() - info.height();
+  function status(message){
 
-    if (theaters) {
-      margin = margin - theaters.height();
+    if (status_message.text()==message) {
+      status_message.text('you should see ...');
+    } else{
+      status_message.text(message);
     };
-  };
 
-  if (margin < 1) { margin = 20};
-  recommendation.css('margin-top', margin+'px');
-}
+  }
 
-function status(message){
-
-  if (status_message.text()==message) {
-    status_message.text('you should see ...');
-  } else{
-    status_message.text(message);
-  };
-
-}
+});
 
