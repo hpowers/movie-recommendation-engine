@@ -18,7 +18,7 @@ $(document).ready(function() {
       breakpoint: 'handheld',
       enter: function() {
         $('#info').click(function(event) {
-          $('#info_box').slideToggle();
+          $('#mobile_info').slideToggle();
           $('#recommendation').toggleClass('pointer');
           return false;
         });
@@ -32,7 +32,7 @@ $(document).ready(function() {
 
         $('#recommendation').click(function(event) {
           // Act on the event
-          $('#info_box').slideToggle();
+          $('#mobile_info').slideToggle();
           $('#recommendation').toggleClass('pointer');
           return false;
         });
@@ -135,6 +135,7 @@ $(document).ready(function() {
 
         function watch_trailer () {
           $('#full_info').hide();
+          // insure i goes back to an x
           $('#yt_trailer').toggle();
           fixMargin();
         }
@@ -151,6 +152,7 @@ $(document).ready(function() {
         $('.arrow').unbind();
         $('.zip_form').unbind();
         $('#info').unbind();
+        $('#recommendation h1 span').unbind();
         // $('#recommendation h1').unbind("hover");
         $('#recommendation').css('margin-top', 'auto');
         $('#full_info').css('display','none')
@@ -219,14 +221,22 @@ function fixMargin(){
     // margin = margin - $('#yt_trailer').height();
 
     // resize trailer (this can potentially be replaced with better API calls)
+    t_max_width = $(window).width()*.95;
+
     t_height = $(window).height() * .61;
     t_width = t_height*16/9;
+
+    if (t_width>t_max_width) {
+      t_width = t_max_width;
+      t_height = t_width * 9/16;
+    };
+
     $('#yt_trailer iframe').css({
        width: t_width,
       height: t_height
     })
 
-    margin = ( $(window).height() - $('#yt_trailer').height() )/2;
+    margin = ( $(window).height() - $('#yt_trailer').height() - 50 )/2;
     margin = margin - $('header').height() - $('#recommendation h3').height() - $('#info').height();
   };
 

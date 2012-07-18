@@ -15,47 +15,7 @@
 
   <div id="main" role="main">
 
-    <div id="full_info">
-      <p>
-       <b>Critics Consensus</b>:
-       <%= @recommendation.movie.rt_datum.critics_consensus %>  
-      </p>
-
-
-      <div class="facts">
-        <p>
-          <span class="left">
-            Rated <%= @recommendation.movie.rt_datum.mpaa_rating %>
-          </span>
-          <span class="right">
-            TMA Score <%= @recommendation.movie.score %>
-          </span>
-          <span>
-            Runtime of <%= @recommendation.movie.rt_datum.runtime %> mins
-          </span>
-        </p>        
-      </div>
-
-      <p class="center">
-        <a href="#" class="watch_trailer" >Watch The Trailer</a>
-      </p>
-
-    </div>
-
-    <div id="info_box">
-      
-      <p>
-        <b>Critics Consensus</b>:
-        <%= @recommendation.movie.rt_datum.critics_consensus %> 
-      </p>
-
-      <div id="trailer">
-        <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-    </div>
-
-    <div id="recommendation">
+    <section id="recommendation">
 
       <div id="yt_trailer">
         <iframe width="1050" height="590" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
@@ -70,9 +30,54 @@
       </h1>
       <div id="rating"><%= @recommendation.movie.score %></div>
 
-    </div>
+    </section> <!--! end of #recommendation -->
 
-    <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_path( @recommendation.ranking + 1 ), :id => "next" %>
+    <nav>
+      <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_path( @recommendation.ranking + 1 ), :id => "next" %>  
+    </nav>
+
+    <article id="full_info">
+      <p>
+       <b>Critics Consensus</b>:
+       <%= @recommendation.movie.rt_datum.critics_consensus %>  
+      </p>
+
+      <section class="facts">
+        <p>
+          <span class="left">
+            Rated <%= @recommendation.movie.rt_datum.mpaa_rating %>
+          </span>
+          <span class="right">
+            TMA Score <%= @recommendation.movie.score %>
+          </span>
+          <span>
+            Runtime of <%= @recommendation.movie.rt_datum.runtime %> mins
+          </span>
+        </p>        
+      </section>
+
+      <p class="center">
+        <a href="#" class="watch_trailer" >Watch The Trailer</a>
+      </p>
+
+    </article> <!--! end of #full_info -->
+
+    <article id="mobile_info">
+      
+      <p>
+        <b>Critics Consensus</b>:
+        <%= @recommendation.movie.rt_datum.critics_consensus %> 
+      </p>
+
+      <div id="trailer">
+        <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+    </article> <!--! end of #mobile_info -->
+
+
+
+
 
   </div>
 </div> <!--! end of #container -->
