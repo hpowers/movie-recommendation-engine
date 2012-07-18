@@ -1,25 +1,16 @@
 // 
-// YouTube iFrame API Code
+// YouTube iFrame API 
 //
 
-// 1. This code loads the IFrame Player API code asynchronously.
+// loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
 tag.src = "http://www.youtube.com/player_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// 2. This function creates an <iframe> (and YouTube player)
-//    after the API code downloads.
 var player;
 function onYouTubePlayerAPIReady() {
   player = new YT.Player('player', {
-    playerVars: {
-      'modestbranding': 1,
-      'rel': 0,
-      'showinfo': 0,
-      'showsearch': 0,
-      'autohide': 1
-    },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
@@ -27,21 +18,16 @@ function onYouTubePlayerAPIReady() {
   });
 }
 
-// 3. The API will call this function when the video player is ready.
+// The API will call this function when the video player is ready.
 function onPlayerReady(event) {
-  // event.target.playVideo();
   event.target.setPlaybackQuality('hd720');
 }
 
-// 4. The API calls this function when the player's state changes.
+//    The API calls this function when the player's state changes.
 //    The function indicates that when playing a video (state=1),
 //    the player should play for six seconds and then stop.
 // var done = false;
 function onPlayerStateChange(event) {
-  // if (event.data == YT.PlayerState.PLAYING && !done) {
-  //   setTimeout(stopVideo, 6000);
-  //   done = true;
-  // }
   if (event.data == YT.PlayerState.BUFFERING) {
     event.target.setPlaybackQuality('hd720');
   }
@@ -55,7 +41,7 @@ function playVideo() {
 }
 
 //
-// END YouTube iFrame API Code
+// END YouTube iFrame API
 //
 
 $(document).ready(function() {
