@@ -66,42 +66,7 @@
       <%= link_to raw("&nbsp;&nbsp;NEXT →"), movie_theater_path( @recommendation.ranking+1, @recommendation.zip_code ), :id => "next" %>  
     </nav>
 
-    <script id="showtimes-template" type="text/x-handlebars-template">
-    
-    <ul>
-        {{#theaters}}
-
-        <div class="listing">
-
-          <li class="theater">{{information.name}}</li>
-
-          <ul class="times">
-            {{#showtimes}}
-            
-            {{#if url}}
-
-              <li><a href="{{url}}">{{time}}</a></li>
-
-            {{else}}
-
-              <li>{{time}}</li>
-
-            {{/if}}
-
-            {{/showtimes}}
-
-          </ul>
-
-        </div>
-
-        {{/theaters}}
-    </ul>
-
-    </script>
-
-    <div id="theaters" data-id="<%= params[:id] %>">loading showtimes...</div>
-
-    
+    <div id="theaters" data-id="<%= params[:id] %>">loading showtimes...</div>   
 
   </div>
 </div> <!--! end of #container -->

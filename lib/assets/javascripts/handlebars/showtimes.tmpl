@@ -1,0 +1,28 @@
+<ul>
+    {{#theaters}}
+
+    <div class="listing">
+
+      <li class="theater">{{information.name}}</li>
+
+      <ul class="times">
+        {{#showtimes}}
+        
+        {{#if url}}
+
+          <li><a href="{{url}}">{{time}}</a></li>
+
+        {{else}}
+
+          <li>{{time}}</li>
+
+        {{/if}}
+
+        {{/showtimes}}
+
+      </ul>
+
+    </div>
+
+    {{/theaters}}
+</ul>

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require handlebars-1.0.0.beta.6.js
+//= require handlebars/showtimes.tmpl.js
 //= require dataTables/jquery.dataTables
 //= require jRespond.min.js
 //= require_tree .

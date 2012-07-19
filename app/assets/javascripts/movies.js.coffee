@@ -10,7 +10,6 @@ firstScriptTag.parentNode.insertBefore tag, firstScriptTag
 
 player = undefined
 window.onYouTubePlayerAPIReady = ->
-  console.log('this is a test')
   player = new YT.Player("player",
     events:
       onReady: onPlayerReady
