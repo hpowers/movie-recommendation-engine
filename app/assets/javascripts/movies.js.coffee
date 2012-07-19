@@ -1,8 +1,12 @@
+# 
+# YouTube iFrame API 
+# 
+
+# loads the IFrame Player API code asynchronously.
 tag = document.createElement("script")
 tag.src = "http://www.youtube.com/player_api"
 firstScriptTag = document.getElementsByTagName("script")[0]
 firstScriptTag.parentNode.insertBefore tag, firstScriptTag
-
 
 player = undefined
 window.onYouTubePlayerAPIReady = ->
@@ -13,15 +17,23 @@ window.onYouTubePlayerAPIReady = ->
       onStateChange: onPlayerStateChange
   )
 
+# The API will call this function when the video player is ready.
 window.onPlayerReady = (event) ->
   event.target.setPlaybackQuality "hd720"
+
+# The API calls this function when the player's state changes.
+# The function indicates that when playing a video (state=1),
+# the player should play for six seconds and then stop.
 window.onPlayerStateChange = (event) ->
   event.target.setPlaybackQuality "hd720"  if event.data is YT.PlayerState.BUFFERING
+
 stopVideo = ->
   player.stopVideo()
+
 playVideo = ->
   player.playVideo()
 
+# call jRespond and add breakpoints
 jRes = jRespond([
   label: "handheld"
   enter: 0
@@ -31,37 +43,69 @@ jRes = jRespond([
   enter: 491
   exit: 10000
  ])
+
 $(document).ready ->
+  # resize the title in mobile view
   mobileTitle = ->
+    
+    # based on iPhone viewport
     max_width = 310
     max_height = 175
+
+    # start at 1/6 of height minus header
     def_font_size = ($(window).height() - $("header").height()) / 6
     recommendation_title.css "font-size", def_font_size + "px"
+    
+    # drop the font size by 1px, until title fits in constraints
     while recommendation_title.width() > max_width or recommendation_title.height() > max_height
       current_size = parseInt(recommendation_title.css("font-size"))
       recommendation_title.css "font-size", (current_size - 1) + "px"
+
+    # title starts off to prevent "jerkiness" resizing
     recommendation_title.css "visibility", "visible"
+  
+  # resize the title in desktop view
   title = ->
+
     max_width = $(window).width() * .90
     def_font_size = ($(window).height() - $("header").height()) / 6
     recommendation_title.css "font-size", def_font_size + "px"
+    
+    # try to get the width under 90% and keep it to 1 line
     while recommendation_title.width() > max_width or recommendation_title.height() > parseInt(recommendation_title.css("line-height")) * 2
+      
       current_size = parseInt(recommendation_title.css("font-size"))
-      break  if current_size is 90
+      
+      # bottom out at 90px
+      break if current_size is 90
+      
       recommendation_title.css "font-size", (current_size - 1) + "px"
+    
+    # update the margin after resizing
     fixMargin()
+
+    # title starts off to prevent "jerkiness" resizing
     recommendation_title.css "visibility", "visible"
+  
+  # adjust the margins
   fixMargin = ->
+
     window_height = $(window).height()
     header_height = $("header").height()
+
     margin = (window_height - $("#recommendation").height()) / 2
+
+    # adjust the margin for showtime information if present 
     showtime_adjust = 0
     showtime_adjust = 60  if theaters.height()
     margin = margin - header_height - showtime_adjust
+    
+    # if a trailer is visible resize it
     unless desktop_trailer.css("display") is "none"
       t_max_width = $(window).width() * .95
       t_height = window_height * .61
       t_width = t_height * 16 / 9
+
       if t_width > t_max_width
         t_width = t_max_width
         t_height = t_width * 9 / 16
@@ -70,6 +114,8 @@ $(document).ready ->
         if t_height > t_max_height
           t_height = t_max_height
           t_width = t_height * 16 / 9
+      
+      # update the trailer with the calculated size
       $("#desktop_trailer iframe").css
         width: t_width
         height: t_height
@@ -79,24 +125,30 @@ $(document).ready ->
       margin = margin - theaters.height()  if theaters
     margin = 20  if margin < 1
     recommendation.css "margin-top", margin + "px"
+  
+  # This function toggles the status message
   status = (message) ->
     if status_message.text() is message
       status_message.text "you should see ..."
     else
       status_message.text message
-  info = $("#info")
-  showtimes = $("#showtimes")
-  recommendation = $("#recommendation")
-  recommendation_title = $("#recommendation h1")
+  
+  # objects for targetting
+  info                      = $("#info")
+  showtimes                 = $("#showtimes")
+  recommendation            = $("#recommendation")
+  recommendation_title      = $("#recommendation h1")
   recommendation_title_span = $("#recommendation h1 span")
-  status_message = $("#recommendation h3")
-  about_the_movie = $("#about_the_movie")
-  theaters_zip = $("#theaters_zip")
-  zip_form = $(".zip_form")
-  zip_form_input = $(".zip_form input")
-  arrow = $(".arrow")
-  desktop_trailer = $("#desktop_trailer")
-  theaters = $("#theaters")
+  status_message            = $("#recommendation h3")
+  about_the_movie           = $("#about_the_movie")
+  theaters_zip              = $("#theaters_zip")
+  zip_form                  = $(".zip_form")
+  zip_form_input            = $(".zip_form input")
+  arrow                     = $(".arrow")
+  desktop_trailer           = $("#desktop_trailer")
+  theaters                  = $("#theaters")
+
+  # register enter and exit functions for a single breakpoint
   jRes.addFunc
     breakpoint: "handheld"
     enter: ->
@@ -119,6 +171,7 @@ $(document).ready ->
       mobileTitle()
 
     exit: ->
+      # clean up bindings when switching to desktop
       info.unbind()
       showtimes.unbind()
       recommendation.unbind()
@@ -127,12 +180,19 @@ $(document).ready ->
     breakpoint: "desktop"
     enter: ->
       watch_trailer = ->
+        # insure the info box is in the correct state
         $("#about_the_movie").hide()
         $("#info").html "&nbsp;&nbsp;i&nbsp;&nbsp;"  if $("#info").text() is "x"
+        # start loading in the video file
         player.playVideo()
+        # show the trailer
         desktop_trailer.toggle()
+        # update the layout
         fixMargin()
+
       title()
+
+      # adjust the title if the window is resized
       $(window).resize ->
         title()
 
@@ -149,6 +209,8 @@ $(document).ready ->
         status "enter your zip code to get showtimes for ..."
 
       zip_starting_val = zip_form.val()
+      # auto submit zip code form when valid zip is entered
+      # and don't submit if zip code is same as code already entered
       theaters_zip.bind "keyup blur change paste", ->
         if theaters_zip.val().length is 5 and theaters_zip.val() isnt zip_starting_val
           theaters_zip.attr "readonly", "readonly"
@@ -187,6 +249,7 @@ $(document).ready ->
         status "watch a trailer for ..."
 
     exit: ->
+      # clean up bindings when switching to mobile
       $(window).unbind()
       arrow.unbind()
       zip_form.unbind()
