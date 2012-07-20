@@ -1,3 +1,5 @@
+# This is a preliminary rating algorithm.
+
 module Scoring
 
   def self.score(movie)

@@ -593,6 +593,12 @@ namespace :db do
       # grab a timestamp to delete old movies with
       start_time = Time.now - 5
 
+      # expire cache
+      Movie.released.min_score.default.count.times do |movie|
+        path = "/movies/#{movie+1}"
+        ApplicationController.expire_page path
+      end
+
       # update the movie list, trailers, and rotten tomato data
       UpdateRottenTomato.in_theaters
         decnt.go('tomato theaters')

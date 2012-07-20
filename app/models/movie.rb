@@ -10,6 +10,7 @@ class Movie < ActiveRecord::Base
   default_scope order("score DESC")
   
   scope :released, where(released: true)
+  scope :default, where(default: true)
   
   # default_scope where('score > ?',1)
   # default_scope limit(10)

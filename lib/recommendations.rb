@@ -20,7 +20,7 @@ class Recommendations
       movies = Movie.released.select {|movie| @data.to_s.include? movie[:title]}  
     else
 
-      movies = Movie.released.min_score.where(default: true)
+      movies = Movie.released.min_score.default
 
     end
     
