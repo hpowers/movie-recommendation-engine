@@ -16,41 +16,11 @@
 
   <div id="main" role="main">
 
-    <article id="about_the_movie">
-      <p>
-       <b>Critics Consensus</b>:
-       <%= @recommendation.movie.rt_datum.critics_consensus %>  
-      </p>
-
-      <section class="facts">
-        <p>
-          <span class="left">
-            Rated <%= @recommendation.movie.rt_datum.mpaa_rating %>
-          </span>
-          <span class="right">
-            TMA Score <%= @recommendation.movie.score %>
-          </span>
-          <span>
-            Runtime of <%= @recommendation.movie.rt_datum.runtime %> mins
-          </span>
-        </p>        
-      </section>
-
-      <p id="watch_desktop_trailer">
-        <a href="#" >Watch The Trailer</a>
-      </p>
-
-      <div id="mobile_trailer">
-        <iframe src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-    </article> <!--! end of #about_the_movie -->
+    <%= render "shared/about_the_movie" %>
 
     <section id="recommendation">
 
-      <div id="desktop_trailer">
-        <iframe id='player' width="1050" height="590" src="http://www.youtube.com/embed/<%= @recommendation.movie.videoid %>?modestbranding=1&rel=0&showinfo=0&showsearch=0&autohide=1" frameborder="0" allowfullscreen></iframe>
-      </div>
+      <%= render "shared/desktop_trailer" %>
       
       <h3>you should see...</h3>
       <h1>
@@ -70,7 +40,3 @@
 
   </div>
 </div> <!--! end of #container -->
-
-
-
-
