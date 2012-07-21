@@ -23,7 +23,7 @@ describe "Default page" do
   it { should have_selector 'input#theaters_zip' }
 
   it "should link to the next movie" do
-    click_link 'Next →'
+    click_link 'next'
     current_path.should be == movie_path(2)
   end
 
