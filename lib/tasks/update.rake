@@ -364,9 +364,16 @@ module UpdateEbert
       # DuckDuck redirects using JS
       final_url = search_file.string.match(/replace\('.+'\)/).to_s[9..-3]
 
-      search_file = open(final_url, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
+      # sometimes the URLS returned from DuckDuck are malformed
+      begin
+        search_file = open(final_url, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)  
+      rescue Exception => e
+        # substiture a high-reliability page to keep everything running smoothly
+        final_url = 'http://drudgereport.com'
+        search_file = open(final_url, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)  
+      end
 
-      @data        = Nokogiri::HTML(search_file)
+      @data = Nokogiri::HTML(search_file)
 
     end
 
@@ -605,7 +612,7 @@ namespace :db do
       UpdateRottenTomato.opening
         decnt.go('tomato opening')
 
-      # Purge.old_movies(start_time)
+      # # Purge.old_movies(start_time)
         decnt.go('purged')
 
       # store movies to avoid excess db calls
@@ -620,8 +627,9 @@ namespace :db do
       # this method also sets movie's default status
       UpdateHsx.data(movies)
         decnt.go('hsx')
-      # disabled to not irittate the google gods
-      # UpdateTweet.num(movies)
+        
+      # # disabled to not irittate the google gods
+      # # UpdateTweet.num(movies)
 
       # calculate scores
       Rake::Task['db:score'].execute
