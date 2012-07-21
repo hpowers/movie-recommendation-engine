@@ -9,8 +9,14 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  # this is really simple single user authentication
+  # the user is defined in config/intializers/user.rb
     def authenticate
       authenticate_or_request_with_http_basic do |username, password|
+        # salt pw
+        password += 'rushmore98'
+        # encrypt pw
+        password = Digest::MD5.hexdigest(password)
         username == USER_ID && password == PASSWORD
       end
     end
