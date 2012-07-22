@@ -287,6 +287,9 @@ b{ font-weight:700 }
         color:$white;
       }
     }
+    a:hover{
+      @include scale(1);
+    }
     #info{ float:left }
     #showtimes{ float:right }
   }

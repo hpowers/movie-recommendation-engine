@@ -151,6 +151,7 @@ $(document).ready ->
   jRes.addFunc
     breakpoint: "handheld"
     enter: ->
+      # alert "mobile"
       info.click (event) ->
         about_the_movie.slideToggle()
         recommendation.toggleClass "pointer"
@@ -178,6 +179,8 @@ $(document).ready ->
   jRes.addFunc
     breakpoint: "desktop"
     enter: ->
+      # mobile safari currently triggers desktop first then mobile
+      # alert "desktop"
       watch_trailer = ->
         # insure the info box is in the correct state
         $("#about_the_movie").hide()
@@ -257,4 +260,5 @@ $(document).ready ->
       recommendation.css "margin-top", "auto"
       about_the_movie.css "display", "none"
       desktop_trailer.css "display", "none"
-      player.stopVideo()
+      # this line bugs out in mobile safari
+      # player.stopVideo()
