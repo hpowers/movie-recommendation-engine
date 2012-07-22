@@ -186,7 +186,7 @@ $(document).ready ->
         $("#about_the_movie").hide()
         $("#info").html "&nbsp;&nbsp;i&nbsp;&nbsp;"  if $("#info").text() is "x"
         # start loading in the video file
-        player.playVideo()
+        # player.playVideo()
         # show the trailer
         desktop_trailer.toggle()
         # update the layout
