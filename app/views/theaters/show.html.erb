@@ -2,7 +2,7 @@
   <header>
 
     <a href="#" id="info">&nbsp;&nbsp;i&nbsp;&nbsp;</a>
-    <span><%= @recommendation.movie.score %></span>
+    <span><%= view_score(@recommendation.movie.score) %></span>
     <a href="#" id="showtimes" ><%= @recommendation.zip_code %></a>
 
     <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form'} do |f| %>

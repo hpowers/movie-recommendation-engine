@@ -28,7 +28,7 @@
         </span>
         <%= link_to image_tag("right_arrow.png", :class => "arrow"), movie_path( @recommendation.ranking + 1 ), :id => "next2" %>
       </h1>
-      <div id="rating"><%= @recommendation.movie.score %></div>
+      <div id="rating"><%= view_score(@recommendation.movie.score) %></div>
 
     </section> <!--! end of #recommendation -->
 
