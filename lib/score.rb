@@ -6,11 +6,22 @@ module Scoring
     # the base score comes from the Rotten Tomato score
     movie.score = movie.rt_datum.critics_score
 
+    # # unless the films lacks a critics consensus (it's in very limited release)
+    if movie.rt_datum.critics_consensus.nil?
+      # in which case we base the score on metacritic
+      movie.score = movie.imdb_datum.metacritic.to_i
+    end
+
     # subtract 50% for G & PG movies
     mpaa_rating = movie.rt_datum.mpaa_rating
     if mpaa_rating == 'G' || mpaa_rating == 'PG'
       movie.score = (0.50 * movie.score).to_i
     end
+
+    # subtract 20% for Unrated
+    if mpaa_rating == 'Unrated'
+      movie.score = (0.80 * movie.score).to_i
+    end    
 
     # subtract 15% for movies trading low (counter art-house effect)
     if movie.hsx_datum.price < 10
