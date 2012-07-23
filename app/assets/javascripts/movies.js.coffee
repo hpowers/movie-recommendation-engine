@@ -147,6 +147,15 @@ $(document).ready ->
   desktop_trailer           = $("#desktop_trailer")
   theaters                  = $("#theaters")
 
+  # handle a few safari quirks
+  # not finished
+  # if navigator.userAgent.match(/OS X.*Safari/) and not navigator.userAgent.match(/Chrome/)
+  #   console.log 'safari detected'
+  #   # safari doesn't support as much styling on their placeholder
+  #   zip_form_input.css 'line-height', '1'
+  #   if zip_form_input.attr("placeholder") == "SHOWTIMES"
+  #     zip_form_input.attr 'placeholder', '   SHOWTIMES'
+
   # register enter and exit functions for a single breakpoint
   jRes.addFunc
     breakpoint: "handheld"
