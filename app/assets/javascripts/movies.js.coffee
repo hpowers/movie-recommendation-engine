@@ -24,12 +24,14 @@ window.onPlayerReady = (event) ->
 # The function indicates that when playing a video (state=1),
 # the player should play for six seconds and then stop.
 window.onPlayerStateChange = (event) ->
+  console.log 'state change'
   event.target.setPlaybackQuality "hd720"  if event.data is YT.PlayerState.BUFFERING
 
 stopVideo = ->
   player.stopVideo()
 
 playVideo = ->
+  console.log 'you made it'
   player.playVideo()
 
 # call jRespond and add breakpoints
@@ -186,7 +188,7 @@ $(document).ready ->
         $("#about_the_movie").hide()
         $("#info").html "&nbsp;&nbsp;i&nbsp;&nbsp;"  if $("#info").text() is "x"
         # start loading in the video file
-        # player.playVideo()
+        player.playVideo()
         # show the trailer
         desktop_trailer.toggle()
         # update the layout
