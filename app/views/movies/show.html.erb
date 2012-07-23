@@ -4,7 +4,7 @@
     <a href="#" id="info">&nbsp;&nbsp;i&nbsp;&nbsp;</a>
     <a href="#" id="showtimes" >SHOWTIMES</a>
 
-    <%= form_for :theaters, url: movie_theaters_path(@id), :html => {:class => 'zip_form'} do |f| %>
+    <%= form_for :theaters, url: movie_theaters_path(@id), :html => {:class => 'zip_form','data-place' => 'SHOWTIMES'} do |f| %>
 
       <%= f.text_field :zip, :placeholder => "SHOWTIMES" %><br>
       <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>

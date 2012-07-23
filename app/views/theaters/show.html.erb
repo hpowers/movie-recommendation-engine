@@ -5,7 +5,7 @@
     <span><%= view_score(@recommendation.movie.score) %></span>
     <a href="#" id="showtimes" ><%= @recommendation.zip_code %></a>
 
-    <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form'} do |f| %>
+    <%= form_for :theaters, url: movie_theaters_path(@recommendation.movie.id), :html => {:class => 'zip_form','data-place' => @recommendation.zip_code} do |f| %>
 
       <%= f.text_field :zip, :placeholder => @recommendation.zip_code %><br>
       <%= f.hidden_field :movie_id, :value => "id#{@recommendation.movie.id}" %>

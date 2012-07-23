@@ -147,14 +147,20 @@ $(document).ready ->
   desktop_trailer           = $("#desktop_trailer")
   theaters                  = $("#theaters")
 
+  zip_placeholder = 'ZIP'
+
   # handle a few safari quirks
-  # not finished
-  # if navigator.userAgent.match(/OS X.*Safari/) and not navigator.userAgent.match(/Chrome/)
-  #   console.log 'safari detected'
-  #   # safari doesn't support as much styling on their placeholder
-  #   zip_form_input.css 'line-height', '1'
-  #   if zip_form_input.attr("placeholder") == "SHOWTIMES"
-  #     zip_form_input.attr 'placeholder', '   SHOWTIMES'
+  if navigator.userAgent.match(/OS X.*Safari/) and not navigator.userAgent.match(/Chrome/)
+    # safari doesn't render placeholders well
+    zip_placeholder = '           ZIP'
+    zip_form_input.css 'line-height', '1'
+    console.log 'safari detected'
+
+    place_val = zip_form.data("place")
+    if place_val == "SHOWTIMES"
+      zip_form_input.attr 'placeholder', '   SHOWTIMES'
+    else
+      zip_form_input.attr 'placeholder', '         '+place_val
 
   # register enter and exit functions for a single breakpoint
   jRes.addFunc
@@ -222,7 +228,7 @@ $(document).ready ->
 
       zip_form.click (event) ->
         zip_form.unbind "hover"
-        theaters_zip.attr "placeholder", "ZIP"
+        theaters_zip.attr "placeholder", zip_placeholder
         status "enter your zip code to get showtimes for ..."
 
       zip_starting_val = zip_form.val()
