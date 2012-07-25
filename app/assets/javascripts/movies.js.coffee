@@ -32,6 +32,23 @@ stopVideo = ->
 playVideo = ->
   player.playVideo()
 
+# mobile detection
+isMobile =
+  Android: ->
+    (if navigator.userAgent.match(/Android/i) then true else false)
+
+  BlackBerry: ->
+    (if navigator.userAgent.match(/BlackBerry/i) then true else false)
+
+  iOS: ->
+    (if navigator.userAgent.match(/iPhone|iPad|iPod/i) then true else false)
+
+  Windows: ->
+    (if navigator.userAgent.match(/IEMobile/i) then true else false)
+
+  any: ->
+    isMobile.Android() or isMobile.BlackBerry() or isMobile.iOS() or isMobile.Windows()
+
 # call jRespond and add breakpoints
 jRes = jRespond([
   label: "handheld"
@@ -154,7 +171,7 @@ $(document).ready ->
     # safari doesn't render placeholders well
     zip_placeholder = '           ZIP'
     zip_form_input.css 'line-height', '1'
-    console.log 'safari detected'
+    # console.log 'safari detected'
 
     place_val = zip_form.data("place")
     if place_val == "SHOWTIMES"
@@ -210,9 +227,9 @@ $(document).ready ->
           unless typeof player.playVideo is "function"
             setTimeout wait_for_load, 50
             return
-          playVideo()
+          # don't call playVideo on non-mobile devices
+          playVideo() if !isMobile.any()
         wait_for_load()
-
       title()
 
       # adjust the title if the window is resized
