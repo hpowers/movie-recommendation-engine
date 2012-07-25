@@ -14,7 +14,7 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="cleartype" content="on">
-
+  <%= render "shared/google_analytics" if Rails.env == 'production' %>
 </head>
 
 <body class="<%= "#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}" %>">
