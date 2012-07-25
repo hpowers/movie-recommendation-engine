@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
     redirect_to movie_path(1) 
   end
 
-  caches_page :show
+  # caches_page :show
 
   def show
 
@@ -24,10 +24,10 @@ class MoviesController < ApplicationController
 
   def update
 
-    # expire cache
-    Movie.released.min_score.default.count.times do |movie|
-      expire_page movie_path(movie+1)
-    end
+    # # expire cache
+    # Movie.released.min_score.default.count.times do |movie|
+    #   expire_page movie_path(movie+1)
+    # end
 
     id = params[:id]
 
